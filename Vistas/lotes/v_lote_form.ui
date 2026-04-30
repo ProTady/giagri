@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>LoteForm</class>
+ <widget class="QDialog" name="LoteForm">
+  <property name="geometry"><rect><x>0</x><y>0</y><width>680</width><height>720</height></rect></property>
+  <property name="windowTitle"><string>Lote</string></property>
+  <layout class="QVBoxLayout" name="lytRoot">
+   <property name="leftMargin"><number>20</number></property>
+   <property name="topMargin"><number>16</number></property>
+   <property name="rightMargin"><number>20</number></property>
+   <property name="bottomMargin"><number>16</number></property>
+   <property name="spacing"><number>10</number></property>
+   <item><widget class="QLabel" name="lblTitulo"><property name="text"><string>Nuevo Lote</string></property></widget></item>
+   <item><widget class="QFrame" name="lineSep"><property name="frameShape"><enum>QFrame::HLine</enum></property><property name="frameShadow"><enum>QFrame::Plain</enum></property></widget></item>
+
+   <item>
+    <widget class="QTabWidget" name="tabs">
+     <widget class="QWidget" name="tabGeneral">
+      <attribute name="title"><string>Identificación</string></attribute>
+      <layout class="QFormLayout" name="lytGen">
+       <property name="horizontalSpacing"><number>14</number></property>
+       <property name="verticalSpacing"><number>10</number></property>
+       <property name="labelAlignment"><set>Qt::AlignRight|Qt::AlignVCenter</set></property>
+       <item row="0" column="0"><widget class="QLabel" name="l1"><property name="text"><string>Código *</string></property></widget></item>
+       <item row="0" column="1"><widget class="QLineEdit" name="txtCodigo"><property name="placeholderText"><string>L-001</string></property></widget></item>
+       <item row="1" column="0"><widget class="QLabel" name="l2"><property name="text"><string>Nombre *</string></property></widget></item>
+       <item row="1" column="1"><widget class="QLineEdit" name="txtNombre"><property name="placeholderText"><string>Ej: Lote Norte 1</string></property></widget></item>
+       <item row="2" column="0"><widget class="QLabel" name="l3"><property name="text"><string>Tipo de cultivo</string></property></widget></item>
+       <item row="2" column="1"><widget class="QComboBox" name="cboCultivo"/></item>
+       <item row="3" column="0"><widget class="QLabel" name="l4"><property name="text"><string>Variedad</string></property></widget></item>
+       <item row="3" column="1"><widget class="QComboBox" name="cboVariedad"/></item>
+       <item row="4" column="0"><widget class="QLabel" name="l5"><property name="text"><string>Patrón</string></property></widget></item>
+       <item row="4" column="1"><widget class="QComboBox" name="cboPatron"/></item>
+       <item row="5" column="0"><widget class="QLabel" name="l6"><property name="text"><string>Estado *</string></property></widget></item>
+       <item row="5" column="1">
+        <widget class="QComboBox" name="cboEstado">
+         <item><property name="text"><string>Activo</string></property></item>
+         <item><property name="text"><string>En desarrollo</string></property></item>
+         <item><property name="text"><string>Inactivo</string></property></item>
+         <item><property name="text"><string>Erradicado</string></property></item>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+
+     <widget class="QWidget" name="tabTecnico">
+      <attribute name="title"><string>Datos técnicos</string></attribute>
+      <layout class="QFormLayout" name="lytTec">
+       <property name="horizontalSpacing"><number>14</number></property>
+       <property name="verticalSpacing"><number>10</number></property>
+       <property name="labelAlignment"><set>Qt::AlignRight|Qt::AlignVCenter</set></property>
+       <item row="0" column="0"><widget class="QLabel" name="l10"><property name="text"><string>Hectáreas</string></property></widget></item>
+       <item row="0" column="1"><widget class="QDoubleSpinBox" name="spHa"><property name="maximum"><double>99999.9999</double></property><property name="decimals"><number>4</number></property><property name="suffix"><string> ha</string></property></widget></item>
+       <item row="1" column="0"><widget class="QLabel" name="l11"><property name="text"><string>Fecha siembra</string></property></widget></item>
+       <item row="1" column="1">
+        <layout class="QHBoxLayout" name="lyFs"><item><widget class="QCheckBox" name="chkFs"><property name="text"><string>Tiene fecha</string></property></widget></item><item><widget class="QDateEdit" name="dtSiembra"><property name="calendarPopup"><bool>true</bool></property><property name="displayFormat"><string>dd/MM/yyyy</string></property><property name="enabled"><bool>false</bool></property></widget></item></layout>
+       </item>
+       <item row="2" column="0"><widget class="QLabel" name="l12"><property name="text"><string>Inicio producción</string></property></widget></item>
+       <item row="2" column="1">
+        <layout class="QHBoxLayout" name="lyFp"><item><widget class="QCheckBox" name="chkFp"><property name="text"><string>Tiene fecha</string></property></widget></item><item><widget class="QDateEdit" name="dtProd"><property name="calendarPopup"><bool>true</bool></property><property name="displayFormat"><string>dd/MM/yyyy</string></property><property name="enabled"><bool>false</bool></property></widget></item></layout>
+       </item>
+       <item row="3" column="0"><widget class="QLabel" name="l13"><property name="text"><string>Densidad (pl/ha)</string></property></widget></item>
+       <item row="3" column="1"><widget class="QSpinBox" name="spDens"><property name="maximum"><number>99999</number></property></widget></item>
+       <item row="4" column="0"><widget class="QLabel" name="l14"><property name="text"><string>Total plantas</string></property></widget></item>
+       <item row="4" column="1"><widget class="QSpinBox" name="spTotal"><property name="maximum"><number>9999999</number></property></widget></item>
+       <item row="5" column="0"><widget class="QLabel" name="l15"><property name="text"><string>Distancia plantas (m)</string></property></widget></item>
+       <item row="5" column="1"><widget class="QDoubleSpinBox" name="spDistP"><property name="maximum"><double>99.99</double></property><property name="decimals"><number>2</number></property></widget></item>
+       <item row="6" column="0"><widget class="QLabel" name="l16"><property name="text"><string>Distancia filas (m)</string></property></widget></item>
+       <item row="6" column="1"><widget class="QDoubleSpinBox" name="spDistF"><property name="maximum"><double>99.99</double></property><property name="decimals"><number>2</number></property></widget></item>
+       <item row="7" column="0"><widget class="QLabel" name="l17"><property name="text"><string>Sistema de riego</string></property></widget></item>
+       <item row="7" column="1">
+        <widget class="QComboBox" name="cboRiego">
+         <item><property name="text"><string>(no especificado)</string></property></item>
+         <item><property name="text"><string>Goteo</string></property></item>
+         <item><property name="text"><string>Aspersion</string></property></item>
+         <item><property name="text"><string>Microaspersion</string></property></item>
+         <item><property name="text"><string>Gravedad</string></property></item>
+        </widget>
+       </item>
+       <item row="8" column="0"><widget class="QLabel" name="l18"><property name="text"><string>Observaciones</string></property></widget></item>
+       <item row="8" column="1"><widget class="QPlainTextEdit" name="txtObs"><property name="maximumSize"><size><width>16777215</width><height>90</height></size></property></widget></item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+
+   <item><widget class="QLabel" name="lblError"><property name="text"><string/></property><property name="minimumSize"><size><width>0</width><height>18</height></size></property></widget></item>
+   <item>
+    <layout class="QHBoxLayout" name="lytBtns">
+     <item><spacer name="spB"><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property></spacer></item>
+     <item><widget class="QPushButton" name="btnCancelar"><property name="text"><string>Cancelar</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+     <item><widget class="QPushButton" name="btnGuardar"><property name="text"><string>Guardar</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property><property name="default"><bool>true</bool></property></widget></item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

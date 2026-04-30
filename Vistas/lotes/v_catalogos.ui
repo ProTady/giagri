@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CatalogosAgricolas</class>
+ <widget class="QWidget" name="CatalogosAgricolas">
+  <property name="geometry"><rect><x>0</x><y>0</y><width>900</width><height>620</height></rect></property>
+  <layout class="QVBoxLayout" name="lytRoot">
+   <property name="leftMargin"><number>20</number></property>
+   <property name="topMargin"><number>20</number></property>
+   <property name="rightMargin"><number>20</number></property>
+   <property name="bottomMargin"><number>20</number></property>
+   <property name="spacing"><number>14</number></property>
+   <item><widget class="QLabel" name="lblTitulo"><property name="text"><string>Catálogos Agrícolas</string></property></widget></item>
+
+   <item>
+    <widget class="QTabWidget" name="tabs">
+
+     <widget class="QWidget" name="tabCultivos">
+      <attribute name="title"><string>Tipos de Cultivo</string></attribute>
+      <layout class="QVBoxLayout" name="lytC">
+       <item>
+        <layout class="QHBoxLayout" name="lytFormC">
+         <property name="spacing"><number>8</number></property>
+         <item><widget class="QLabel" name="lcN"><property name="text"><string>Nombre:</string></property></widget></item>
+         <item><widget class="QLineEdit" name="txtCultivoNombre"><property name="placeholderText"><string>Ej: Cítrico</string></property></widget></item>
+         <item><widget class="QLabel" name="lcSci"><property name="text"><string>Nombre científico:</string></property></widget></item>
+         <item><widget class="QLineEdit" name="txtCultivoSci"><property name="placeholderText"><string>Citrus sp. (opcional)</string></property></widget></item>
+         <item><widget class="QPushButton" name="btnCultivoAgregar"><property name="text"><string>+ Agregar</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+        </layout>
+       </item>
+       <item><widget class="QTableWidget" name="tblCultivos"/></item>
+       <item>
+        <layout class="QHBoxLayout" name="lytBC">
+         <item><spacer name="spC"><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property></spacer></item>
+         <item><widget class="QPushButton" name="btnCultivoEditar"><property name="text"><string>Editar selección</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+         <item><widget class="QPushButton" name="btnCultivoEliminar"><property name="text"><string>Eliminar</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+
+     <widget class="QWidget" name="tabVariedades">
+      <attribute name="title"><string>Variedades</string></attribute>
+      <layout class="QVBoxLayout" name="lytV">
+       <item>
+        <layout class="QHBoxLayout" name="lytFormV">
+         <property name="spacing"><number>8</number></property>
+         <item><widget class="QLabel" name="lvT"><property name="text"><string>Cultivo:</string></property></widget></item>
+         <item><widget class="QComboBox" name="cboVarCultivo"/></item>
+         <item><widget class="QLabel" name="lvN"><property name="text"><string>Nombre:</string></property></widget></item>
+         <item><widget class="QLineEdit" name="txtVarNombre"/></item>
+         <item><widget class="QLabel" name="lvD"><property name="text"><string>Descripción:</string></property></widget></item>
+         <item><widget class="QLineEdit" name="txtVarDesc"/></item>
+         <item><widget class="QPushButton" name="btnVarAgregar"><property name="text"><string>+ Agregar</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="lytFiltV">
+         <item><widget class="QLabel" name="lvFil"><property name="text"><string>Filtrar por cultivo:</string></property></widget></item>
+         <item><widget class="QComboBox" name="cboVarFiltro"/></item>
+         <item><spacer name="spVF"><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property></spacer></item>
+        </layout>
+       </item>
+       <item><widget class="QTableWidget" name="tblVariedades"/></item>
+       <item>
+        <layout class="QHBoxLayout" name="lytBV">
+         <item><spacer name="spV"><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property></spacer></item>
+         <item><widget class="QPushButton" name="btnVarEditar"><property name="text"><string>Editar selección</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+         <item><widget class="QPushButton" name="btnVarEliminar"><property name="text"><string>Eliminar</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+
+     <widget class="QWidget" name="tabPatrones">
+      <attribute name="title"><string>Patrones</string></attribute>
+      <layout class="QVBoxLayout" name="lytP">
+       <item>
+        <layout class="QHBoxLayout" name="lytFormP">
+         <property name="spacing"><number>8</number></property>
+         <item><widget class="QLabel" name="lpT"><property name="text"><string>Cultivo:</string></property></widget></item>
+         <item><widget class="QComboBox" name="cboPatCultivo"/></item>
+         <item><widget class="QLabel" name="lpN"><property name="text"><string>Nombre:</string></property></widget></item>
+         <item><widget class="QLineEdit" name="txtPatNombre"/></item>
+         <item><widget class="QLabel" name="lpD"><property name="text"><string>Descripción:</string></property></widget></item>
+         <item><widget class="QLineEdit" name="txtPatDesc"/></item>
+         <item><widget class="QPushButton" name="btnPatAgregar"><property name="text"><string>+ Agregar</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="lytFiltP">
+         <item><widget class="QLabel" name="lpFil"><property name="text"><string>Filtrar por cultivo:</string></property></widget></item>
+         <item><widget class="QComboBox" name="cboPatFiltro"/></item>
+         <item><spacer name="spPF"><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property></spacer></item>
+        </layout>
+       </item>
+       <item><widget class="QTableWidget" name="tblPatrones"/></item>
+       <item>
+        <layout class="QHBoxLayout" name="lytBP">
+         <item><spacer name="spP"><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property></spacer></item>
+         <item><widget class="QPushButton" name="btnPatEditar"><property name="text"><string>Editar selección</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+         <item><widget class="QPushButton" name="btnPatEliminar"><property name="text"><string>Eliminar</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

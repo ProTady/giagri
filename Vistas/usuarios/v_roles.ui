@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>RolesPermisos</class>
+ <widget class="QWidget" name="RolesPermisos">
+  <property name="geometry">
+   <rect><x>0</x><y>0</y><width>1100</width><height>660</height></rect>
+  </property>
+  <layout class="QVBoxLayout" name="lytRoot">
+   <property name="leftMargin"><number>20</number></property>
+   <property name="topMargin"><number>20</number></property>
+   <property name="rightMargin"><number>20</number></property>
+   <property name="bottomMargin"><number>20</number></property>
+   <property name="spacing"><number>14</number></property>
+   <item>
+    <widget class="QLabel" name="lblTitulo">
+     <property name="text"><string>Roles y Permisos</string></property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QSplitter" name="splitter">
+     <property name="orientation"><enum>Qt::Horizontal</enum></property>
+     <property name="childrenCollapsible"><bool>false</bool></property>
+
+     <widget class="QFrame" name="paneRoles">
+      <property name="minimumSize"><size><width>280</width><height>0</height></size></property>
+      <property name="maximumSize"><size><width>360</width><height>16777215</height></size></property>
+      <layout class="QVBoxLayout" name="lytRoles">
+       <property name="leftMargin"><number>0</number></property>
+       <property name="topMargin"><number>0</number></property>
+       <property name="rightMargin"><number>0</number></property>
+       <property name="bottomMargin"><number>0</number></property>
+       <property name="spacing"><number>8</number></property>
+       <item>
+        <widget class="QLabel" name="lblRolesTit">
+         <property name="text"><string>Roles del fundo</string></property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QListWidget" name="lstRoles"/>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="lytBtnsRol">
+         <property name="spacing"><number>6</number></property>
+         <item><widget class="QPushButton" name="btnNuevoRol"><property name="text"><string>+ Nuevo</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+         <item><widget class="QPushButton" name="btnRenombrar"><property name="text"><string>Renombrar</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+         <item><widget class="QPushButton" name="btnEliminarRol"><property name="text"><string>Eliminar</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+
+     <widget class="QFrame" name="panePermisos">
+      <layout class="QVBoxLayout" name="lytPerm">
+       <property name="leftMargin"><number>14</number></property>
+       <property name="topMargin"><number>0</number></property>
+       <property name="rightMargin"><number>0</number></property>
+       <property name="bottomMargin"><number>0</number></property>
+       <property name="spacing"><number>8</number></property>
+       <item>
+        <widget class="QLabel" name="lblPermTit">
+         <property name="text"><string>Permisos del rol</string></property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="lblRolSeleccionado">
+         <property name="text"><string>(Selecciona un rol)</string></property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTreeWidget" name="treePermisos">
+         <property name="alternatingRowColors"><bool>true</bool></property>
+         <property name="rootIsDecorated"><bool>true</bool></property>
+         <property name="indentation"><number>18</number></property>
+         <column><property name="text"><string notr="true">Módulo</string></property></column>
+         <column><property name="text"><string notr="true">Ver</string></property></column>
+         <column><property name="text"><string notr="true">Crear</string></property></column>
+         <column><property name="text"><string notr="true">Editar</string></property></column>
+         <column><property name="text"><string notr="true">Eliminar</string></property></column>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="lytBtnsPerm">
+         <item>
+          <widget class="QLabel" name="lblAyuda">
+           <property name="text"><string>Tip: marcar &quot;Ver&quot; en un padre activa también sus hijos automáticamente.</string></property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="spP"><property name="orientation"><enum>Qt::Horizontal</enum></property>
+           <property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property>
+          </spacer>
+         </item>
+         <item><widget class="QPushButton" name="btnGuardarPerm"><property name="text"><string>Guardar Permisos</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

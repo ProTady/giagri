@@ -1,0 +1,38 @@
+# Entorno virtual
+venv/
+.venv/
+env/
+
+# Variables de entorno
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+.pytest_cache/
+
+# Build / dist
+build/
+dist/
+*.spec
+
+# UI compilados (se regeneran con compilar_ui.py)
+# Comenta esta línea si prefieres versionarlos
+# Vistas/**/ui_*.py
+
+# IDE
+.vscode/
+.idea/
+.claude/
+*.swp
+
+# Logs
+*.log
+logs/
+
+# Sistema
+.DS_Store
+Thumbs.db

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>UsuarioForm</class>
+ <widget class="QDialog" name="UsuarioForm">
+  <property name="geometry">
+   <rect><x>0</x><y>0</y><width>520</width><height>600</height></rect>
+  </property>
+  <property name="windowTitle">
+   <string>Usuario</string>
+  </property>
+  <layout class="QVBoxLayout" name="lytRoot">
+   <property name="leftMargin"><number>25</number></property>
+   <property name="topMargin"><number>20</number></property>
+   <property name="rightMargin"><number>25</number></property>
+   <property name="bottomMargin"><number>20</number></property>
+   <property name="spacing"><number>10</number></property>
+   <item>
+    <widget class="QLabel" name="lblTitulo">
+     <property name="text"><string>Nuevo Usuario</string></property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QFrame" name="lineSep">
+     <property name="frameShape"><enum>QFrame::HLine</enum></property>
+     <property name="frameShadow"><enum>QFrame::Plain</enum></property>
+    </widget>
+   </item>
+
+   <item>
+    <layout class="QFormLayout" name="lytForm">
+     <property name="horizontalSpacing"><number>14</number></property>
+     <property name="verticalSpacing"><number>10</number></property>
+     <property name="labelAlignment"><set>Qt::AlignRight|Qt::AlignVCenter</set></property>
+
+     <item row="0" column="0"><widget class="QLabel" name="l1"><property name="text"><string>Usuario *</string></property></widget></item>
+     <item row="0" column="1"><widget class="QLineEdit" name="txtUsername"><property name="placeholderText"><string>jperez</string></property></widget></item>
+
+     <item row="1" column="0"><widget class="QLabel" name="l2"><property name="text"><string>Nombre completo *</string></property></widget></item>
+     <item row="1" column="1"><widget class="QLineEdit" name="txtNombre"><property name="placeholderText"><string>Juan Pérez</string></property></widget></item>
+
+     <item row="2" column="0"><widget class="QLabel" name="l3"><property name="text"><string>Correo</string></property></widget></item>
+     <item row="2" column="1"><widget class="QLineEdit" name="txtCorreo"><property name="placeholderText"><string>juan@empresa.com</string></property></widget></item>
+
+     <item row="3" column="0"><widget class="QLabel" name="l4"><property name="text"><string>Contraseña *</string></property></widget></item>
+     <item row="3" column="1"><widget class="QLineEdit" name="txtClave"><property name="echoMode"><enum>QLineEdit::Password</enum></property><property name="placeholderText"><string>Mínimo 6 caracteres</string></property></widget></item>
+
+     <item row="4" column="0"><widget class="QLabel" name="l5"><property name="text"><string>Confirmar *</string></property></widget></item>
+     <item row="4" column="1"><widget class="QLineEdit" name="txtClave2"><property name="echoMode"><enum>QLineEdit::Password</enum></property></widget></item>
+
+     <item row="5" column="0"><widget class="QLabel" name="l6"><property name="text"><string>Es administrador</string></property></widget></item>
+     <item row="5" column="1"><widget class="QCheckBox" name="chkAdmin"><property name="text"><string>Acceso total al sistema</string></property></widget></item>
+
+     <item row="6" column="0"><widget class="QLabel" name="l7"><property name="text"><string>Activo</string></property></widget></item>
+     <item row="6" column="1"><widget class="QCheckBox" name="chkActivo"><property name="text"><string>Puede iniciar sesión</string></property><property name="checked"><bool>true</bool></property></widget></item>
+    </layout>
+   </item>
+
+   <item>
+    <widget class="QLabel" name="lblRolesTit">
+     <property name="text"><string>Roles asignados</string></property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QListWidget" name="lstRoles">
+     <property name="minimumSize"><size><width>0</width><height>110</height></size></property>
+    </widget>
+   </item>
+
+   <item>
+    <widget class="QLabel" name="lblError">
+     <property name="text"><string/></property>
+     <property name="minimumSize"><size><width>0</width><height>18</height></size></property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="lytBtns">
+     <item>
+      <spacer name="spB"><property name="orientation"><enum>Qt::Horizontal</enum></property>
+       <property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property>
+      </spacer>
+     </item>
+     <item><widget class="QPushButton" name="btnCancelar"><property name="text"><string>Cancelar</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+     <item><widget class="QPushButton" name="btnGuardar"><property name="text"><string>Guardar</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property><property name="default"><bool>true</bool></property></widget></item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

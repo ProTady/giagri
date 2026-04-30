@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DialogLogin</class>
+ <widget class="QDialog" name="DialogLogin">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>440</width>
+    <height>520</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>GIAGRI - Iniciar sesión</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="leftMargin"><number>35</number></property>
+   <property name="topMargin"><number>25</number></property>
+   <property name="rightMargin"><number>35</number></property>
+   <property name="bottomMargin"><number>25</number></property>
+   <property name="spacing"><number>10</number></property>
+   <item>
+    <widget class="QLabel" name="lblLogo">
+     <property name="minimumSize"><size><width>0</width><height>140</height></size></property>
+     <property name="maximumSize"><size><width>16777215</width><height>140</height></size></property>
+     <property name="text"><string/></property>
+     <property name="alignment"><set>Qt::AlignCenter</set></property>
+     <property name="scaledContents"><bool>false</bool></property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="lblTitulo">
+     <property name="text"><string>GIAGRI</string></property>
+     <property name="alignment"><set>Qt::AlignCenter</set></property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="lblSub">
+     <property name="text"><string>Sistema de Gestión Agrícola</string></property>
+     <property name="alignment"><set>Qt::AlignCenter</set></property>
+    </widget>
+   </item>
+   <item>
+    <spacer name="sp1">
+     <property name="orientation"><enum>Qt::Vertical</enum></property>
+     <property name="sizeHint" stdset="0"><size><width>20</width><height>10</height></size></property>
+    </spacer>
+   </item>
+   <item>
+    <widget class="QLabel" name="lblUsuario">
+     <property name="text"><string>Usuario</string></property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLineEdit" name="txtUsuario">
+     <property name="placeholderText"><string>Ingrese su usuario</string></property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="lblClave">
+     <property name="text"><string>Contraseña</string></property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLineEdit" name="txtClave">
+     <property name="echoMode"><enum>QLineEdit::Password</enum></property>
+     <property name="placeholderText"><string>Ingrese su contraseña</string></property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="lblError">
+     <property name="text"><string/></property>
+     <property name="alignment"><set>Qt::AlignCenter</set></property>
+     <property name="minimumSize"><size><width>0</width><height>18</height></size></property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="hLayBotones">
+     <property name="spacing"><number>10</number></property>
+     <item>
+      <widget class="QPushButton" name="btnCancelar">
+       <property name="text"><string>Cancelar</string></property>
+       <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnIngresar">
+       <property name="text"><string>Ingresar</string></property>
+       <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
+       <property name="default"><bool>true</bool></property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>txtUsuario</tabstop>
+  <tabstop>txtClave</tabstop>
+  <tabstop>btnIngresar</tabstop>
+  <tabstop>btnCancelar</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

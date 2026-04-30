@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>EmpleadoForm</class>
+ <widget class="QDialog" name="EmpleadoForm">
+  <property name="geometry"><rect><x>0</x><y>0</y><width>720</width><height>720</height></rect></property>
+  <property name="windowTitle"><string>Empleado</string></property>
+  <layout class="QVBoxLayout" name="lytRoot">
+   <property name="leftMargin"><number>20</number></property>
+   <property name="topMargin"><number>16</number></property>
+   <property name="rightMargin"><number>20</number></property>
+   <property name="bottomMargin"><number>16</number></property>
+   <property name="spacing"><number>10</number></property>
+   <item><widget class="QLabel" name="lblTitulo"><property name="text"><string>Nuevo Empleado</string></property></widget></item>
+   <item><widget class="QFrame" name="lineSep"><property name="frameShape"><enum>QFrame::HLine</enum></property><property name="frameShadow"><enum>QFrame::Plain</enum></property></widget></item>
+
+   <item>
+    <widget class="QTabWidget" name="tabs">
+     <widget class="QWidget" name="tabPersonal">
+      <attribute name="title"><string>Datos personales</string></attribute>
+      <layout class="QFormLayout" name="lytPers">
+       <property name="horizontalSpacing"><number>14</number></property>
+       <property name="verticalSpacing"><number>10</number></property>
+       <property name="labelAlignment"><set>Qt::AlignRight|Qt::AlignVCenter</set></property>
+       <item row="0" column="0"><widget class="QLabel" name="l1"><property name="text"><string>Código *</string></property></widget></item>
+       <item row="0" column="1"><widget class="QLineEdit" name="txtCodigo"><property name="placeholderText"><string>EMP-001</string></property></widget></item>
+       <item row="1" column="0"><widget class="QLabel" name="l2"><property name="text"><string>DNI *</string></property></widget></item>
+       <item row="1" column="1"><widget class="QLineEdit" name="txtDni"><property name="maxLength"><number>15</number></property></widget></item>
+       <item row="2" column="0"><widget class="QLabel" name="l3"><property name="text"><string>Apellido paterno *</string></property></widget></item>
+       <item row="2" column="1"><widget class="QLineEdit" name="txtApPaterno"/></item>
+       <item row="3" column="0"><widget class="QLabel" name="l4"><property name="text"><string>Apellido materno</string></property></widget></item>
+       <item row="3" column="1"><widget class="QLineEdit" name="txtApMaterno"/></item>
+       <item row="4" column="0"><widget class="QLabel" name="l5"><property name="text"><string>Nombres *</string></property></widget></item>
+       <item row="4" column="1"><widget class="QLineEdit" name="txtNombres"/></item>
+       <item row="5" column="0"><widget class="QLabel" name="l6"><property name="text"><string>Fecha nacimiento</string></property></widget></item>
+       <item row="5" column="1"><widget class="QDateEdit" name="dtNac"><property name="calendarPopup"><bool>true</bool></property><property name="displayFormat"><string>dd/MM/yyyy</string></property></widget></item>
+       <item row="6" column="0"><widget class="QLabel" name="l7"><property name="text"><string>Sexo</string></property></widget></item>
+       <item row="6" column="1">
+        <widget class="QComboBox" name="cboSexo">
+         <item><property name="text"><string>(no especificado)</string></property></item>
+         <item><property name="text"><string>Masculino</string></property></item>
+         <item><property name="text"><string>Femenino</string></property></item>
+        </widget>
+       </item>
+       <item row="7" column="0"><widget class="QLabel" name="l8"><property name="text"><string>Estado civil</string></property></widget></item>
+       <item row="7" column="1">
+        <widget class="QComboBox" name="cboEstadoCivil"><property name="editable"><bool>false</bool></property>
+         <item><property name="text"><string/></property></item>
+         <item><property name="text"><string>Soltero(a)</string></property></item>
+         <item><property name="text"><string>Casado(a)</string></property></item>
+         <item><property name="text"><string>Conviviente</string></property></item>
+         <item><property name="text"><string>Divorciado(a)</string></property></item>
+         <item><property name="text"><string>Viudo(a)</string></property></item>
+        </widget>
+       </item>
+       <item row="8" column="0"><widget class="QLabel" name="l9"><property name="text"><string>Dirección</string></property></widget></item>
+       <item row="8" column="1"><widget class="QLineEdit" name="txtDireccion"/></item>
+       <item row="9" column="0"><widget class="QLabel" name="l10"><property name="text"><string>Teléfono</string></property></widget></item>
+       <item row="9" column="1"><widget class="QLineEdit" name="txtTelefono"/></item>
+       <item row="10" column="0"><widget class="QLabel" name="l11"><property name="text"><string>Correo</string></property></widget></item>
+       <item row="10" column="1"><widget class="QLineEdit" name="txtCorreo"/></item>
+      </layout>
+     </widget>
+
+     <widget class="QWidget" name="tabLaboral">
+      <attribute name="title"><string>Datos laborales</string></attribute>
+      <layout class="QFormLayout" name="lytLab">
+       <property name="horizontalSpacing"><number>14</number></property>
+       <property name="verticalSpacing"><number>10</number></property>
+       <property name="labelAlignment"><set>Qt::AlignRight|Qt::AlignVCenter</set></property>
+       <item row="0" column="0"><widget class="QLabel" name="l20"><property name="text"><string>Cargo</string></property></widget></item>
+       <item row="0" column="1"><widget class="QComboBox" name="cboCargo"/></item>
+       <item row="1" column="0"><widget class="QLabel" name="l21"><property name="text"><string>Área de trabajo</string></property></widget></item>
+       <item row="1" column="1"><widget class="QComboBox" name="cboArea"/></item>
+       <item row="2" column="0"><widget class="QLabel" name="l22"><property name="text"><string>Fecha ingreso *</string></property></widget></item>
+       <item row="2" column="1"><widget class="QDateEdit" name="dtIngreso"><property name="calendarPopup"><bool>true</bool></property><property name="displayFormat"><string>dd/MM/yyyy</string></property></widget></item>
+       <item row="3" column="0"><widget class="QLabel" name="l23"><property name="text"><string>Fecha cese</string></property></widget></item>
+       <item row="3" column="1">
+        <layout class="QHBoxLayout" name="lytCese">
+         <item><widget class="QCheckBox" name="chkCese"><property name="text"><string>Tiene fecha de cese</string></property></widget></item>
+         <item><widget class="QDateEdit" name="dtCese"><property name="calendarPopup"><bool>true</bool></property><property name="displayFormat"><string>dd/MM/yyyy</string></property><property name="enabled"><bool>false</bool></property></widget></item>
+        </layout>
+       </item>
+       <item row="4" column="0"><widget class="QLabel" name="l24"><property name="text"><string>Estado *</string></property></widget></item>
+       <item row="4" column="1">
+        <widget class="QComboBox" name="cboEstado">
+         <item><property name="text"><string>Activo</string></property></item>
+         <item><property name="text"><string>Vacaciones</string></property></item>
+         <item><property name="text"><string>Suspendido</string></property></item>
+         <item><property name="text"><string>Cesado</string></property></item>
+        </widget>
+       </item>
+       <item row="5" column="0"><widget class="QLabel" name="l25"><property name="text"><string>Sueldo base</string></property></widget></item>
+       <item row="5" column="1"><widget class="QDoubleSpinBox" name="spSueldo"><property name="maximum"><double>999999.99</double></property><property name="decimals"><number>2</number></property></widget></item>
+       <item row="6" column="0"><widget class="QLabel" name="l26"><property name="text"><string>Banco</string></property></widget></item>
+       <item row="6" column="1"><widget class="QLineEdit" name="txtBanco"/></item>
+       <item row="7" column="0"><widget class="QLabel" name="l27"><property name="text"><string>Cuenta bancaria</string></property></widget></item>
+       <item row="7" column="1"><widget class="QLineEdit" name="txtCuenta"/></item>
+       <item row="8" column="0"><widget class="QLabel" name="l28"><property name="text"><string>Observaciones</string></property></widget></item>
+       <item row="8" column="1"><widget class="QPlainTextEdit" name="txtObs"><property name="maximumSize"><size><width>16777215</width><height>90</height></size></property></widget></item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+
+   <item><widget class="QLabel" name="lblError"><property name="text"><string/></property><property name="minimumSize"><size><width>0</width><height>18</height></size></property></widget></item>
+   <item>
+    <layout class="QHBoxLayout" name="lytBtns">
+     <item><spacer name="spB"><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property></spacer></item>
+     <item><widget class="QPushButton" name="btnCancelar"><property name="text"><string>Cancelar</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+     <item><widget class="QPushButton" name="btnGuardar"><property name="text"><string>Guardar</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property><property name="default"><bool>true</bool></property></widget></item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

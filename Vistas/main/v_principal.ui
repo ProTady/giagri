@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>VentanaPrincipal</class>
+ <widget class="QMainWindow" name="VentanaPrincipal">
+  <property name="geometry">
+   <rect><x>0</x><y>0</y><width>1280</width><height>760</height></rect>
+  </property>
+  <property name="windowTitle">
+   <string>GIAGRI - Sistema de Gestión Agrícola</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="lytRoot">
+    <property name="leftMargin"><number>0</number></property>
+    <property name="topMargin"><number>0</number></property>
+    <property name="rightMargin"><number>0</number></property>
+    <property name="bottomMargin"><number>0</number></property>
+    <property name="spacing"><number>0</number></property>
+
+    <!-- ======= HEADER ======= -->
+    <item>
+     <widget class="QFrame" name="frameHeader">
+      <property name="minimumSize"><size><width>0</width><height>64</height></size></property>
+      <property name="maximumSize"><size><width>16777215</width><height>64</height></size></property>
+      <layout class="QHBoxLayout" name="lytHeader">
+       <property name="leftMargin"><number>16</number></property>
+       <property name="topMargin"><number>8</number></property>
+       <property name="rightMargin"><number>16</number></property>
+       <property name="bottomMargin"><number>8</number></property>
+       <property name="spacing"><number>12</number></property>
+       <item>
+        <widget class="QLabel" name="lblLogoMini">
+         <property name="minimumSize"><size><width>48</width><height>48</height></size></property>
+         <property name="maximumSize"><size><width>48</width><height>48</height></size></property>
+         <property name="text"><string/></property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="lblAppNombre">
+         <property name="text"><string>GIAGRI</string></property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="spHeader">
+         <property name="orientation"><enum>Qt::Horizontal</enum></property>
+         <property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="lblFundo">
+         <property name="text"><string>Fundo</string></property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="sepH1">
+         <property name="frameShape"><enum>QFrame::VLine</enum></property>
+         <property name="frameShadow"><enum>QFrame::Plain</enum></property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="lblUsuario">
+         <property name="text"><string>Usuario</string></property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnSalir">
+         <property name="text"><string>Cerrar sesión</string></property>
+         <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+
+    <!-- ======= CUERPO ======= -->
+    <item>
+     <widget class="QSplitter" name="splitterCuerpo">
+      <property name="orientation"><enum>Qt::Horizontal</enum></property>
+      <property name="childrenCollapsible"><bool>false</bool></property>
+
+      <widget class="QFrame" name="frameMenu">
+       <property name="minimumSize"><size><width>240</width><height>0</height></size></property>
+       <property name="maximumSize"><size><width>360</width><height>16777215</height></size></property>
+       <layout class="QVBoxLayout" name="lytMenu">
+        <property name="leftMargin"><number>0</number></property>
+        <property name="topMargin"><number>0</number></property>
+        <property name="rightMargin"><number>0</number></property>
+        <property name="bottomMargin"><number>0</number></property>
+        <property name="spacing"><number>0</number></property>
+        <item>
+         <widget class="QLabel" name="lblMenuTitulo">
+          <property name="text"><string>  MENÚ</string></property>
+          <property name="minimumSize"><size><width>0</width><height>32</height></size></property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTreeWidget" name="treeMenu">
+          <property name="headerHidden"><bool>true</bool></property>
+          <property name="indentation"><number>16</number></property>
+          <property name="animated"><bool>true</bool></property>
+          <column>
+           <property name="text"><string notr="true">1</string></property>
+          </column>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+
+      <widget class="QStackedWidget" name="stackContenido">
+       <widget class="QWidget" name="paginaInicio">
+        <layout class="QVBoxLayout" name="lytInicio">
+         <item>
+          <widget class="QLabel" name="lblBienvenida">
+           <property name="text"><string>Bienvenido a GIAGRI</string></property>
+           <property name="alignment"><set>Qt::AlignCenter</set></property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="lblBienvenidaSub">
+           <property name="text"><string>Selecciona un módulo del menú lateral</string></property>
+           <property name="alignment"><set>Qt::AlignCenter</set></property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </widget>
+    </item>
+
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,33 @@
+# ===== GIAGRI - Sistema de Gestión Agrícola =====
+# Python 3.10.11
+# Versiones fijadas para reproducibilidad
+
+# --- GUI ---
+PySide6==6.8.1
+PySide6-Essentials==6.8.1
+PySide6-Addons==6.8.1
+shiboken6==6.8.1
+
+# --- Base de datos ---
+psycopg[binary]==3.2.3
+psycopg-pool==3.2.4
+
+# --- Seguridad / Hash de contraseñas ---
+bcrypt==4.2.1
+
+# --- Configuración ---
+python-dotenv==1.0.1
+
+# --- Datos / Reportes ---
+pandas==2.2.3
+numpy==2.2.0
+openpyxl==3.1.5
+matplotlib==3.10.1
+
+# --- Utilidades ---
+python-dateutil==2.9.0.post0
+requests==2.32.4
+Pillow==11.2.1
+
+# --- Empaquetado (solo desarrollo) ---
+pyinstaller==6.11.1
