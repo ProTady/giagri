@@ -130,12 +130,21 @@ class CvPrincipal(QMainWindow):
         if codigo in ("LOTES_CULTIVOS", "LOTES_VARIEDADES", "LOTES_PATRONES"):
             from Logica_Vistas.cv_catalogos_agricolas import CvCatalogosAgricolas
             w = CvCatalogosAgricolas()
-            # Abrir directamente en la pestaña correcta
             indice = {"LOTES_CULTIVOS": 0,
                       "LOTES_VARIEDADES": 1,
                       "LOTES_PATRONES": 2}.get(codigo, 0)
             w.ui.tabs.setCurrentIndex(indice)
             return w
+        if codigo in ("PERSONAL_CARGOS", "PERSONAL_AREAS"):
+            from Logica_Vistas.cv_catalogos_personal import CvCatalogosPersonal
+            w = CvCatalogosPersonal()
+            indice = {"PERSONAL_CARGOS": 0,
+                      "PERSONAL_AREAS": 1}.get(codigo, 0)
+            w.ui.tabs.setCurrentIndex(indice)
+            return w
+        if codigo == "ADMIN_FUNDO":
+            from Logica_Vistas.cv_fundo_form import CvFundoForm
+            return CvFundoForm()
         return self._crear_placeholder(codigo, nombre)
 
     def _crear_placeholder(self, codigo: str, nombre: str) -> QWidget:
