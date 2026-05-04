@@ -15,8 +15,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QComboBox, QDialog, QHBoxLayout,
-    QLabel, QListView, QListWidget, QListWidgetItem,
+from PySide6.QtWidgets import (QApplication, QDialog, QHBoxLayout, QLabel,
+    QListView, QListWidget, QListWidgetItem, QProgressBar,
     QPushButton, QSizePolicy, QSpacerItem, QVBoxLayout,
     QWidget)
 
@@ -24,7 +24,7 @@ class Ui_CapturarRostro(object):
     def setupUi(self, CapturarRostro):
         if not CapturarRostro.objectName():
             CapturarRostro.setObjectName(u"CapturarRostro")
-        CapturarRostro.resize(820, 620)
+        CapturarRostro.resize(900, 660)
         self.lytRoot = QVBoxLayout(CapturarRostro)
         self.lytRoot.setSpacing(10)
         self.lytRoot.setObjectName(u"lytRoot")
@@ -39,61 +39,53 @@ class Ui_CapturarRostro(object):
 
         self.lytRoot.addWidget(self.lblEmpleado)
 
-        self.lblInstr = QLabel(CapturarRostro)
-        self.lblInstr.setObjectName(u"lblInstr")
-        self.lblInstr.setWordWrap(True)
-
-        self.lytRoot.addWidget(self.lblInstr)
-
         self.lytCuerpo = QHBoxLayout()
         self.lytCuerpo.setSpacing(14)
         self.lytCuerpo.setObjectName(u"lytCuerpo")
+        self.lytIzq = QVBoxLayout()
+        self.lytIzq.setObjectName(u"lytIzq")
         self.lblVideo = QLabel(CapturarRostro)
         self.lblVideo.setObjectName(u"lblVideo")
-        self.lblVideo.setMinimumSize(QSize(500, 400))
+        self.lblVideo.setMinimumSize(QSize(560, 420))
         self.lblVideo.setAlignment(Qt.AlignCenter)
         self.lblVideo.setStyleSheet(u"background:#222; color:#aaa; border-radius:6px;")
 
-        self.lytCuerpo.addWidget(self.lblVideo)
+        self.lytIzq.addWidget(self.lblVideo)
+
+        self.lblInstr = QLabel(CapturarRostro)
+        self.lblInstr.setObjectName(u"lblInstr")
+        self.lblInstr.setAlignment(Qt.AlignCenter)
+        self.lblInstr.setMinimumSize(QSize(0, 40))
+
+        self.lytIzq.addWidget(self.lblInstr)
+
+        self.prgEstable = QProgressBar(CapturarRostro)
+        self.prgEstable.setObjectName(u"prgEstable")
+        self.prgEstable.setValue(0)
+        self.prgEstable.setTextVisible(False)
+        self.prgEstable.setMaximum(100)
+        self.prgEstable.setMaximumSize(QSize(16777215, 10))
+
+        self.lytIzq.addWidget(self.prgEstable)
+
+
+        self.lytCuerpo.addLayout(self.lytIzq)
 
         self.lytLado = QVBoxLayout()
         self.lytLado.setSpacing(10)
         self.lytLado.setObjectName(u"lytLado")
-        self.lblEstado = QLabel(CapturarRostro)
-        self.lblEstado.setObjectName(u"lblEstado")
+        self.lblPasoTit = QLabel(CapturarRostro)
+        self.lblPasoTit.setObjectName(u"lblPasoTit")
 
-        self.lytLado.addWidget(self.lblEstado)
+        self.lytLado.addWidget(self.lblPasoTit)
 
-        self.lblCalidad = QLabel(CapturarRostro)
-        self.lblCalidad.setObjectName(u"lblCalidad")
+        self.lstObjetivos = QListWidget(CapturarRostro)
+        self.lstObjetivos.setObjectName(u"lstObjetivos")
+        self.lstObjetivos.setIconSize(QSize(32, 32))
+        self.lstObjetivos.setMinimumSize(QSize(240, 0))
+        self.lstObjetivos.setMaximumSize(QSize(280, 16777215))
 
-        self.lytLado.addWidget(self.lblCalidad)
-
-        self.lblConteo = QLabel(CapturarRostro)
-        self.lblConteo.setObjectName(u"lblConteo")
-
-        self.lytLado.addWidget(self.lblConteo)
-
-        self.cboAngulo = QComboBox(CapturarRostro)
-        self.cboAngulo.addItem("")
-        self.cboAngulo.addItem("")
-        self.cboAngulo.addItem("")
-        self.cboAngulo.addItem("")
-        self.cboAngulo.addItem("")
-        self.cboAngulo.setObjectName(u"cboAngulo")
-
-        self.lytLado.addWidget(self.cboAngulo)
-
-        self.btnCapturar = QPushButton(CapturarRostro)
-        self.btnCapturar.setObjectName(u"btnCapturar")
-        self.btnCapturar.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.btnCapturar.setMinimumSize(QSize(0, 40))
-
-        self.lytLado.addWidget(self.btnCapturar)
-
-        self.spLado = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.lytLado.addItem(self.spLado)
+        self.lytLado.addWidget(self.lstObjetivos)
 
         self.lblYaReg = QLabel(CapturarRostro)
         self.lblYaReg.setObjectName(u"lblYaReg")
@@ -102,11 +94,10 @@ class Ui_CapturarRostro(object):
 
         self.lstRegistrados = QListWidget(CapturarRostro)
         self.lstRegistrados.setObjectName(u"lstRegistrados")
-        self.lstRegistrados.setIconSize(QSize(64, 64))
+        self.lstRegistrados.setIconSize(QSize(56, 56))
         self.lstRegistrados.setViewMode(QListView.IconMode)
         self.lstRegistrados.setResizeMode(QListView.Adjust)
         self.lstRegistrados.setMovement(QListView.Static)
-        self.lstRegistrados.setMinimumSize(QSize(240, 0))
 
         self.lytLado.addWidget(self.lstRegistrados)
 
@@ -124,6 +115,18 @@ class Ui_CapturarRostro(object):
 
         self.lytBtns = QHBoxLayout()
         self.lytBtns.setObjectName(u"lytBtns")
+        self.btnReiniciar = QPushButton(CapturarRostro)
+        self.btnReiniciar.setObjectName(u"btnReiniciar")
+        self.btnReiniciar.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+
+        self.lytBtns.addWidget(self.btnReiniciar)
+
+        self.btnCapturarManual = QPushButton(CapturarRostro)
+        self.btnCapturarManual.setObjectName(u"btnCapturarManual")
+        self.btnCapturarManual.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+
+        self.lytBtns.addWidget(self.btnCapturarManual)
+
         self.spB = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.lytBtns.addItem(self.spB)
@@ -147,20 +150,13 @@ class Ui_CapturarRostro(object):
         CapturarRostro.setWindowTitle(QCoreApplication.translate("CapturarRostro", u"Registrar Rostro", None))
         self.lblTitulo.setText(QCoreApplication.translate("CapturarRostro", u"Registrar Rostro", None))
         self.lblEmpleado.setText(QCoreApplication.translate("CapturarRostro", u"Empleado", None))
-        self.lblInstr.setText(QCoreApplication.translate("CapturarRostro", u"Mira a la c\u00e1mara y presiona \"Capturar\". Captura al menos 3 fotos en distintos \u00e1ngulos (frente, izquierda, derecha).", None))
         self.lblVideo.setText(QCoreApplication.translate("CapturarRostro", u"Iniciando c\u00e1mara...", None))
-        self.lblEstado.setText(QCoreApplication.translate("CapturarRostro", u"Detectando rostro...", None))
-        self.lblCalidad.setText(QCoreApplication.translate("CapturarRostro", u"Calidad: --", None))
-        self.lblConteo.setText(QCoreApplication.translate("CapturarRostro", u"Capturados: 0", None))
-        self.cboAngulo.setItemText(0, QCoreApplication.translate("CapturarRostro", u"Frente", None))
-        self.cboAngulo.setItemText(1, QCoreApplication.translate("CapturarRostro", u"Izquierda", None))
-        self.cboAngulo.setItemText(2, QCoreApplication.translate("CapturarRostro", u"Derecha", None))
-        self.cboAngulo.setItemText(3, QCoreApplication.translate("CapturarRostro", u"Arriba", None))
-        self.cboAngulo.setItemText(4, QCoreApplication.translate("CapturarRostro", u"Abajo", None))
-
-        self.btnCapturar.setText(QCoreApplication.translate("CapturarRostro", u"Capturar", None))
-        self.lblYaReg.setText(QCoreApplication.translate("CapturarRostro", u"Ya registrados:", None))
+        self.lblInstr.setText(QCoreApplication.translate("CapturarRostro", u"Ac\u00e9rcate a la c\u00e1mara", None))
+        self.lblPasoTit.setText(QCoreApplication.translate("CapturarRostro", u"Capturas", None))
+        self.lblYaReg.setText(QCoreApplication.translate("CapturarRostro", u"Registrados", None))
         self.btnEliminarSel.setText(QCoreApplication.translate("CapturarRostro", u"Eliminar seleccionado", None))
+        self.btnReiniciar.setText(QCoreApplication.translate("CapturarRostro", u"Reiniciar gu\u00eda", None))
+        self.btnCapturarManual.setText(QCoreApplication.translate("CapturarRostro", u"Capturar manual", None))
         self.btnCerrar.setText(QCoreApplication.translate("CapturarRostro", u"Cerrar", None))
     # retranslateUi
 

@@ -48,16 +48,29 @@ class CvReconocimientoVivo(QWidget):
         self._frame_count = 0
         self._fps_t0 = time.time()
         self._fps_frames = 0
+        self._auto_iniciado = False
 
         # Para no spamear el panel lateral con la misma persona
         self._ultima_deteccion: dict[int, float] = {}
 
-        self.ui.btnIniciar.clicked.connect(self._iniciar_camara)
+        self.ui.btnIniciar.clicked.connect(lambda: self._iniciar_camara(False))
         self.ui.btnDetener.clicked.connect(self._detener_camara)
         self.ui.btnRecargar.clicked.connect(self._cargar_registrados)
         self.ui.btnDetener.setEnabled(False)
 
+        self.ui.lblVideo.setText(
+            "Cargando modelos...\n\n"
+            "(La primera vez descarga ~37 MB. Espera unos segundos.)"
+        )
+
         self._cargar_registrados()
+
+    # Auto-iniciar cuando el widget se muestra por primera vez
+    def showEvent(self, ev) -> None:
+        super().showEvent(ev)
+        if not self._auto_iniciado:
+            self._auto_iniciado = True
+            QTimer.singleShot(200, lambda: self._iniciar_camara(silencioso=True))
 
     # ------------------------------------------------------------------
     def _cargar_registrados(self) -> None:
@@ -71,10 +84,11 @@ class CvReconocimientoVivo(QWidget):
             f"(<i>{len(self._registrados)} embeddings</i>)"
         )
 
-    def _iniciar_camara(self) -> None:
+    def _iniciar_camara(self, silencioso: bool = False) -> None:
+        """silencioso=True: no muestra el diálogo si no hay rostros (para auto-start)."""
         if self._thread is not None and self._thread.isRunning():
             return
-        if not self._registrados:
+        if not self._registrados and not silencioso:
             r = QMessageBox.question(
                 self, "Sin registros",
                 "No hay rostros registrados todavía. ¿Iniciar igualmente?\n"
@@ -83,6 +97,8 @@ class CvReconocimientoVivo(QWidget):
             )
             if r != QMessageBox.StandardButton.Yes:
                 return
+        log.info("Iniciando cámara (registrados=%d)", len(self._registrados))
+        self.ui.lblVideo.setText("Abriendo cámara...")
         self._thread = ThreadCamara()
         self._thread.frame_listo.connect(self._on_frame)
         self._thread.error.connect(self._on_error)
@@ -100,7 +116,14 @@ class CvReconocimientoVivo(QWidget):
         self.ui.btnDetener.setEnabled(False)
 
     def _on_error(self, msg: str) -> None:
-        QMessageBox.critical(self, "Error de cámara", msg)
+        log.error("Error cámara: %s", msg)
+        self.ui.lblVideo.setText("✗ Cámara no disponible")
+        QMessageBox.critical(
+            self, "Error de cámara",
+            f"{msg}\n\n"
+            "Si tienes cámara: ve a Configuración de Windows → "
+            "Privacidad → Cámara y permite el acceso a aplicaciones de escritorio."
+        )
         self._detener_camara()
 
     # ------------------------------------------------------------------

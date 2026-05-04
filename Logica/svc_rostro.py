@@ -74,6 +74,58 @@ class Rostro:
         self.normed_embedding = normed_embedding  # 128 floats normalizados
         self._face_aligned = face_aligned     # imagen alineada (debug)
 
+    def estimar_direccion(self) -> tuple[str, float, float]:
+        """Estima la dirección desde landmarks. Devuelve (etiqueta, yaw, pitch).
+
+        Convención (perspectiva del usuario; cámara SIN espejo):
+            - 'derecha'   → usuario gira la cabeza a SU derecha
+            - 'izquierda' → usuario gira la cabeza a SU izquierda
+            - 'arriba'    → usuario mira hacia arriba
+            - 'abajo'     → usuario mira hacia abajo
+            - 'frente'    → al centro
+        """
+        lm = self.landmarks_5
+        re_x, re_y = lm[0], lm[1]      # ojo derecho en la imagen
+        le_x, le_y = lm[2], lm[3]      # ojo izquierdo en la imagen
+        n_x,  n_y  = lm[4], lm[5]      # nariz
+        mr_x, mr_y = lm[6], lm[7]      # comisura derecha
+        ml_x, ml_y = lm[8], lm[9]      # comisura izquierda
+
+        # Centro horizontal entre ojos y boca
+        face_cx = (re_x + le_x + mr_x + ml_x) / 4
+        face_cy_top = (re_y + le_y) / 2
+        face_cy_bot = (mr_y + ml_y) / 2
+
+        eye_dist = max(abs(le_x - re_x), 1.0)
+        face_h = max(face_cy_bot - face_cy_top, 1.0)
+
+        # Yaw normalizado: nariz desplazada horizontalmente
+        yaw = (n_x - face_cx) / eye_dist
+
+        # Pitch normalizado: posición vertical de la nariz entre ojos y boca
+        # 0 = a la altura de los ojos; 1 = a la altura de la boca
+        # Frente típico ~0.45-0.55. <0.35 = mirando arriba, >0.65 = abajo
+        pitch_raw = (n_y - face_cy_top) / face_h
+
+        # En cámara NO espejada:
+        #   nariz a la IZQ del centro de la imagen (yaw < 0)
+        #   = usuario gira a SU DERECHA
+        UMBRAL_YAW = 0.18
+        UMBRAL_PITCH_UP = 0.30
+        UMBRAL_PITCH_DN = 0.65
+
+        if yaw < -UMBRAL_YAW:
+            etiqueta = "derecha"
+        elif yaw > UMBRAL_YAW:
+            etiqueta = "izquierda"
+        elif pitch_raw < UMBRAL_PITCH_UP:
+            etiqueta = "arriba"
+        elif pitch_raw > UMBRAL_PITCH_DN:
+            etiqueta = "abajo"
+        else:
+            etiqueta = "frente"
+        return etiqueta, float(yaw), float(pitch_raw)
+
 
 class SvcRostro:
     """Singleton — detector + recognizer cargados una vez."""
