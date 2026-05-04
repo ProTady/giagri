@@ -80,6 +80,31 @@ class ClEmpleado:
                   "cuenta_banco","banco","observaciones"]
         return dict(zip(campos, r))
 
+    def siguiente_codigo(self, id_fundo: int, prefijo: str = "EMP-") -> str:
+        """Genera el próximo código auto-incrementable.
+
+        Busca el MÁXIMO sufijo numérico entre todos los códigos existentes
+        del fundo (sin importar el prefijo) y devuelve <prefijo><N+1>.
+        Mantiene el ancho de zero-padding (3 dígitos por defecto).
+        """
+        import re
+        sql = "SELECT codigo FROM personal.empleado WHERE id_fundo = %s"
+        with ConexionPostgres().conexion() as conn, conn.cursor() as cur:
+            cur.execute(sql, (id_fundo,))
+            codigos = [r[0] for r in cur.fetchall()]
+
+        max_n = 0
+        ancho = 3
+        for c in codigos:
+            m = re.search(r"(\d+)$", c or "")
+            if m:
+                n = int(m.group(1))
+                if n > max_n:
+                    max_n = n
+                    ancho = max(ancho, len(m.group(1)))
+
+        return f"{prefijo}{max_n + 1:0{ancho}d}"
+
     def existe(self, id_fundo: int, campo: str, valor: str,
                excluir_id: Optional[int] = None) -> bool:
         if campo not in ("codigo", "dni"):

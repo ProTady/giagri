@@ -58,6 +58,13 @@ class CvEmpleadoForm(QDialog):
         if self._id_empleado is None:
             self.ui.lblTitulo.setText("Nuevo Empleado")
             self.setWindowTitle("Nuevo Empleado")
+            # Sugerir el siguiente código
+            try:
+                sugerido = self._cl.siguiente_codigo(self._id_fundo)
+                self.ui.txtCodigo.setText(sugerido)
+                self.ui.txtCodigo.setPlaceholderText(sugerido)
+            except Exception:
+                pass
             return
 
         self.ui.lblTitulo.setText("Editar Empleado")
