@@ -83,6 +83,12 @@ class Ui_EmpleadosLista(object):
 
         self.lytFiltros.addWidget(self.btnEditar)
 
+        self.btnRostro = QPushButton(EmpleadosLista)
+        self.btnRostro.setObjectName(u"btnRostro")
+        self.btnRostro.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+
+        self.lytFiltros.addWidget(self.btnRostro)
+
         self.btnEliminar = QPushButton(EmpleadosLista)
         self.btnEliminar.setObjectName(u"btnEliminar")
         self.btnEliminar.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
@@ -115,6 +121,7 @@ class Ui_EmpleadosLista(object):
 
         self.btnNuevo.setText(QCoreApplication.translate("EmpleadosLista", u"+ Nuevo Empleado", None))
         self.btnEditar.setText(QCoreApplication.translate("EmpleadosLista", u"Editar", None))
+        self.btnRostro.setText(QCoreApplication.translate("EmpleadosLista", u"Registrar Rostro", None))
         self.btnEliminar.setText(QCoreApplication.translate("EmpleadosLista", u"Eliminar", None))
         pass
     # retranslateUi

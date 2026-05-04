@@ -32,6 +32,7 @@
      <item><spacer name="spF"><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property></spacer></item>
      <item><widget class="QPushButton" name="btnNuevo"><property name="text"><string>+ Nuevo Empleado</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
      <item><widget class="QPushButton" name="btnEditar"><property name="text"><string>Editar</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+     <item><widget class="QPushButton" name="btnRostro"><property name="text"><string>Registrar Rostro</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
      <item><widget class="QPushButton" name="btnEliminar"><property name="text"><string>Eliminar</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
     </layout>
    </item>

@@ -29,5 +29,10 @@ python-dateutil==2.9.0.post0
 requests==2.32.4
 Pillow==11.2.1
 
+# --- Reconocimiento facial ---
+opencv-python==4.10.0.84
+insightface==0.7.3
+onnxruntime==1.20.1
+
 # --- Empaquetado (solo desarrollo) ---
 pyinstaller==6.11.1

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ReconocimientoVivo</class>
+ <widget class="QWidget" name="ReconocimientoVivo">
+  <property name="geometry"><rect><x>0</x><y>0</y><width>1100</width><height>620</height></rect></property>
+  <layout class="QVBoxLayout" name="lytRoot">
+   <property name="leftMargin"><number>20</number></property>
+   <property name="topMargin"><number>20</number></property>
+   <property name="rightMargin"><number>20</number></property>
+   <property name="bottomMargin"><number>20</number></property>
+   <property name="spacing"><number>14</number></property>
+   <item>
+    <layout class="QHBoxLayout" name="lytTit">
+     <item><widget class="QLabel" name="lblTitulo"><property name="text"><string>Reconocimiento Facial en Vivo</string></property></widget></item>
+     <item><spacer name="spT"><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property></spacer></item>
+     <item><widget class="QLabel" name="lblFps"><property name="text"><string>FPS: --</string></property></widget></item>
+     <item><widget class="QLabel" name="lblCount"><property name="text"><string>Empleados con rostro: --</string></property></widget></item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="lytCuerpo">
+     <property name="spacing"><number>14</number></property>
+     <item>
+      <widget class="QLabel" name="lblVideo">
+       <property name="minimumSize"><size><width>720</width><height>540</height></size></property>
+       <property name="alignment"><set>Qt::AlignCenter</set></property>
+       <property name="text"><string>Iniciando cámara...</string></property>
+       <property name="styleSheet"><string notr="true">background:#222; color:#aaa; border-radius:6px;</string></property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="lytLado">
+       <property name="spacing"><number>10</number></property>
+       <item><widget class="QLabel" name="lblDeteccionTit"><property name="text"><string>Detecciones recientes</string></property></widget></item>
+       <item><widget class="QListWidget" name="lstDetecciones"><property name="iconSize"><size><width>48</width><height>48</height></size></property></widget></item>
+       <item>
+        <layout class="QHBoxLayout" name="lytBtns">
+         <item><widget class="QPushButton" name="btnRecargar"><property name="text"><string>Recargar</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+         <item><widget class="QPushButton" name="btnIniciar"><property name="text"><string>Iniciar</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+         <item><widget class="QPushButton" name="btnDetener"><property name="text"><string>Detener</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

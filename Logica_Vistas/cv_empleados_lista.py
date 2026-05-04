@@ -20,7 +20,7 @@ from Conexion.cn_sesion import Sesion
 log = logging.getLogger(__name__)
 
 CABECERAS = ["Código", "DNI", "Apellidos", "Nombres",
-             "Cargo", "Área", "Ingreso", "Estado"]
+             "Cargo", "Área", "Ingreso", "Estado", "Rostros"]
 
 COLOR_ESTADO = {
     "Activo":     COLOR_SECUNDARIO,
@@ -45,6 +45,7 @@ class CvEmpleadosLista(QWidget):
 
         self.ui.btnNuevo.clicked.connect(self._nuevo)
         self.ui.btnEditar.clicked.connect(self._editar)
+        self.ui.btnRostro.clicked.connect(self._registrar_rostro)
         self.ui.btnEliminar.clicked.connect(self._eliminar)
         self.ui.txtBuscar.textChanged.connect(lambda _: self._cargar())
         self.ui.cboEstado.currentIndexChanged.connect(lambda _: self._cargar())
@@ -61,13 +62,15 @@ class CvEmpleadosLista(QWidget):
         t.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
         t.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         t.verticalHeader().setVisible(False)
-        for col, w in enumerate([90, 100, 220, 180, 140, 130, 100, 100]):
+        for col, w in enumerate([90, 100, 220, 180, 140, 130, 100, 100, 80]):
             t.setColumnWidth(col, w)
 
     def _configurar_permisos(self) -> None:
         s = self._sesion
         self.ui.btnNuevo.setVisible(s.puede("PERSONAL_LISTA", "crear"))
         self.ui.btnEditar.setVisible(s.puede("PERSONAL_LISTA", "editar"))
+        self.ui.btnRostro.setVisible(s.puede("PERSONAL_LISTA", "editar")
+                                     or s.usuario.es_admin)
         self.ui.btnEliminar.setVisible(s.puede("PERSONAL_LISTA", "eliminar"))
 
     def _cargar(self) -> None:
@@ -82,6 +85,15 @@ class CvEmpleadosLista(QWidget):
             QMessageBox.critical(self, "Error", f"No se pudieron cargar:\n{e}")
             return
 
+        # Cargar conteo de rostros por empleado
+        try:
+            from Logica.cl_rostro_empleado import ClRostroEmpleado
+            self._rostros_count = ClRostroEmpleado().contar_por_empleado(
+                self._sesion.usuario.id_fundo
+            )
+        except Exception:
+            self._rostros_count = {}
+
         t = self.ui.tblEmpleados
         t.setRowCount(0)
         for f in filas:
@@ -93,14 +105,19 @@ class CvEmpleadosLista(QWidget):
         fila = t.rowCount()
         t.insertRow(fila)
         ingreso = e.fecha_ingreso.strftime("%Y-%m-%d") if e.fecha_ingreso else ""
+        rostros = getattr(self, "_rostros_count", {}).get(e.id_empleado, 0)
         valores = [e.codigo, e.dni, e.apellidos, e.nombres,
-                   e.cargo, e.area, ingreso, e.estado]
+                   e.cargo, e.area, ingreso, e.estado, str(rostros)]
         for col, txt in enumerate(valores):
             it = QTableWidgetItem(txt)
             it.setData(Qt.ItemDataRole.UserRole, e.id_empleado)
             if col == 7:
                 color = COLOR_ESTADO.get(e.estado, COLOR_TEXTO_TENUE)
                 it.setForeground(QColor(color))
+            if col == 8:
+                it.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+                if rostros > 0:
+                    it.setForeground(QColor(COLOR_SECUNDARIO))
             t.setItem(fila, col, it)
 
     def _id_seleccionado(self) -> Optional[int]:
@@ -125,6 +142,29 @@ class CvEmpleadosLista(QWidget):
         dlg = CvEmpleadoForm(self._sesion.usuario.id_fundo, id_e, self)
         if dlg.exec() == dlg.DialogCode.Accepted:
             self._cargar()
+
+    def _registrar_rostro(self) -> None:
+        id_e = self._id_seleccionado()
+        if id_e is None:
+            QMessageBox.information(self, "Registrar rostro",
+                                    "Selecciona un empleado primero.")
+            return
+        # Tomar nombre desde la fila seleccionada
+        fila = self.ui.tblEmpleados.currentRow()
+        nombre = (self.ui.tblEmpleados.item(fila, 2).text() + " " +
+                  self.ui.tblEmpleados.item(fila, 3).text())
+        try:
+            from Logica_Vistas.cv_capturar_rostro import CvCapturarRostro
+        except Exception as e:
+            QMessageBox.critical(
+                self, "Falta dependencia",
+                "No se pudo importar el módulo de cámara.\n\n"
+                f"{e}\n\nEjecuta: pip install opencv-python insightface onnxruntime"
+            )
+            return
+        dlg = CvCapturarRostro(id_e, nombre, self)
+        dlg.exec()
+        self._cargar()
 
     def _eliminar(self) -> None:
         id_e = self._id_seleccionado()

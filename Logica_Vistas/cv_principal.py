@@ -145,6 +145,9 @@ class CvPrincipal(QMainWindow):
         if codigo == "ADMIN_FUNDO":
             from Logica_Vistas.cv_fundo_form import CvFundoForm
             return CvFundoForm()
+        if codigo == "PERSONAL_RECONOCIMIENTO":
+            from Logica_Vistas.cv_reconocimiento_vivo import CvReconocimientoVivo
+            return CvReconocimientoVivo()
         return self._crear_placeholder(codigo, nombre)
 
     def _crear_placeholder(self, codigo: str, nombre: str) -> QWidget:
