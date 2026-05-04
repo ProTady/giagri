@@ -33,6 +33,9 @@ dist/
 *.log
 logs/
 
+# Modelos ONNX descargados automáticamente (~37 MB)
+modelos/
+
 # Sistema
 .DS_Store
 Thumbs.db

@@ -1,69 +1,152 @@
 """
-Servicio de reconocimiento facial.
-Wrapper alrededor de InsightFace + utilidades de comparación.
+Servicio de reconocimiento facial usando OpenCV YuNet + SFace.
 
-El modelo se carga UNA sola vez (singleton, lazy).
-La primera llamada descarga el modelo (~30MB) en ~/.insightface/
+Modelos (descarga automática a la carpeta `modelos/` la primera vez):
+  - YuNet  (~340 KB) — detector de rostros con landmarks
+  - SFace  (~37 MB)  — embeddings 128-dim para reconocimiento
+
+Ventaja vs InsightFace: no requiere compilar nada, solo opencv-python.
 """
 from __future__ import annotations
 
 import logging
+import urllib.request
+from pathlib import Path
 from typing import Optional
 
+import cv2
 import numpy as np
 
 log = logging.getLogger(__name__)
 
 
 # ----- Umbrales -----
-# Cosine similarity entre 2 embeddings normalizados:
-#   > 0.55 → posible match
-#   > 0.65 → match seguro
-UMBRAL_MATCH = 0.55
-UMBRAL_BUENO = 0.65
+# SFace usa cosine similarity (recomendado por OpenCV Zoo: 0.363)
+# Subimos un poco para mejorar precisión:
+UMBRAL_MATCH = 0.40   # posible match
+UMBRAL_BUENO = 0.55   # match seguro
 
-CALIDAD_MINIMA_REGISTRO = 0.65   # det_score mínimo para aceptar el registro
+CALIDAD_MINIMA_REGISTRO = 0.65   # det_score mínimo para registrar
+
+
+# ----- Modelos -----
+_RAIZ = Path(__file__).resolve().parent.parent
+CARPETA_MODELOS = _RAIZ / "modelos"
+
+MODELOS = {
+    "yunet": {
+        "archivo": "face_detection_yunet_2023mar.onnx",
+        "url": ("https://github.com/opencv/opencv_zoo/raw/main/models/"
+                "face_detection_yunet/face_detection_yunet_2023mar.onnx"),
+    },
+    "sface": {
+        "archivo": "face_recognition_sface_2021dec.onnx",
+        "url": ("https://github.com/opencv/opencv_zoo/raw/main/models/"
+                "face_recognition_sface/face_recognition_sface_2021dec.onnx"),
+    },
+}
+
+
+def _descargar_modelo(clave: str) -> Path:
+    """Descarga el modelo si no existe; devuelve la ruta local."""
+    info = MODELOS[clave]
+    CARPETA_MODELOS.mkdir(exist_ok=True)
+    destino = CARPETA_MODELOS / info["archivo"]
+    if destino.exists() and destino.stat().st_size > 1024:
+        return destino
+    log.info("Descargando modelo %s desde %s ...", clave, info["url"])
+    print(f"[INFO] Descargando modelo {clave} (puede demorar la primera vez)...")
+    urllib.request.urlretrieve(info["url"], destino)
+    log.info("Modelo %s guardado en %s", clave, destino)
+    return destino
+
+
+class Rostro:
+    """Resultado de detección: bbox + landmarks + embedding."""
+    __slots__ = ("bbox", "det_score", "landmarks_5", "normed_embedding",
+                 "_face_aligned")
+
+    def __init__(self, bbox, det_score, landmarks_5,
+                 normed_embedding, face_aligned):
+        self.bbox = bbox                      # (x1, y1, x2, y2)
+        self.det_score = det_score
+        self.landmarks_5 = landmarks_5        # 5 puntos (10 floats)
+        self.normed_embedding = normed_embedding  # 128 floats normalizados
+        self._face_aligned = face_aligned     # imagen alineada (debug)
 
 
 class SvcRostro:
-    """Servicio singleton de reconocimiento facial."""
+    """Singleton — detector + recognizer cargados una vez."""
 
     _instancia: Optional["SvcRostro"] = None
-    _app = None  # FaceAnalysis
+    _detector = None
+    _recognizer = None
 
     def __new__(cls):
         if cls._instancia is None:
             cls._instancia = super().__new__(cls)
         return cls._instancia
 
-    def _cargar_modelo(self):
-        """Carga el modelo InsightFace (lazy)."""
-        if self._app is not None:
-            return self._app
+    def _cargar(self):
+        if self._detector is not None and self._recognizer is not None:
+            return
+        log.info("Cargando modelos de rostro...")
+        ruta_yunet = _descargar_modelo("yunet")
+        ruta_sface = _descargar_modelo("sface")
 
-        log.info("Cargando modelo InsightFace (puede demorar la primera vez)...")
-        from insightface.app import FaceAnalysis
-
-        self._app = FaceAnalysis(
-            name="buffalo_s",                   # ~30MB, rápido
-            providers=["CPUExecutionProvider"],
+        self._detector = cv2.FaceDetectorYN.create(
+            str(ruta_yunet), "", (320, 320),
+            score_threshold=0.6, nms_threshold=0.3, top_k=5000,
         )
-        self._app.prepare(ctx_id=0, det_size=(640, 640))
-        log.info("Modelo InsightFace listo.")
-        return self._app
+        self._recognizer = cv2.FaceRecognizerSF.create(
+            str(ruta_sface), "",
+        )
+        log.info("Modelos de rostro listos.")
 
     # ------------------------------------------------------------------
-    def detectar(self, img_bgr: np.ndarray):
-        """Detecta rostros y devuelve lista de Face (con bbox + embedding)."""
-        app = self._cargar_modelo()
-        return app.get(img_bgr)
+    def _detectar_raw(self, img_bgr: np.ndarray):
+        """Devuelve el array crudo de YuNet o None."""
+        self._cargar()
+        h, w = img_bgr.shape[:2]
+        self._detector.setInputSize((w, h))
+        _, faces = self._detector.detect(img_bgr)
+        return faces
 
-    def detectar_uno(self, img_bgr: np.ndarray):
-        """Devuelve el rostro más grande (None si no hay)."""
+    def detectar(self, img_bgr: np.ndarray) -> list[Rostro]:
+        """Detecta todos los rostros y calcula embeddings."""
+        faces = self._detectar_raw(img_bgr)
+        if faces is None or len(faces) == 0:
+            return []
+        rostros = []
+        for f in faces:
+            # f: [x, y, w, h, lx_re, ly_re, lx_le, ly_le, lx_n, ly_n,
+            #     lx_mr, ly_mr, lx_ml, ly_ml, score]
+            x, y, w, h = f[0], f[1], f[2], f[3]
+            score = float(f[14])
+            bbox = (float(x), float(y), float(x + w), float(y + h))
+            landmarks = f[4:14].copy()
+
+            # Alinear y obtener embedding
+            try:
+                aligned = self._recognizer.alignCrop(img_bgr, f)
+                emb = self._recognizer.feature(aligned)  # (1, 128)
+                emb = emb.flatten().astype(np.float32)
+                # Normalizar (norm L2)
+                norm = np.linalg.norm(emb)
+                if norm > 0:
+                    emb = emb / norm
+            except Exception as e:
+                log.warning("No se pudo alinear/embedding: %s", e)
+                continue
+
+            rostros.append(Rostro(bbox, score, landmarks, emb, aligned))
+        return rostros
+
+    def detectar_uno(self, img_bgr: np.ndarray) -> Optional[Rostro]:
         rostros = self.detectar(img_bgr)
         if not rostros:
             return None
-        # El más grande por área del bbox
+        # El más grande
         def area(r):
             x1, y1, x2, y2 = r.bbox
             return (x2 - x1) * (y2 - y1)
@@ -72,26 +155,21 @@ class SvcRostro:
     # ------------------------------------------------------------------
     @staticmethod
     def comparar(emb_a: np.ndarray, emb_b: np.ndarray) -> float:
-        """Cosine similarity entre 2 embeddings ya normalizados."""
+        """Cosine similarity (ya normalizados → producto punto)."""
         return float(np.dot(emb_a, emb_b))
 
     @staticmethod
     def serializar(emb: np.ndarray) -> bytes:
-        """np.array → bytes para guardar en BD (BYTEA)."""
         return np.asarray(emb, dtype=np.float32).tobytes()
 
     @staticmethod
     def deserializar(data: bytes) -> np.ndarray:
-        """BYTEA → np.array."""
         return np.frombuffer(data, dtype=np.float32)
 
     # ------------------------------------------------------------------
     @staticmethod
     def thumb_jpeg(img_bgr: np.ndarray, bbox, tam: int = 100) -> bytes:
-        """Recorta y redimensiona el rostro a JPEG bytes."""
-        import cv2
         x1, y1, x2, y2 = [int(v) for v in bbox]
-        # Margen
         h, w = img_bgr.shape[:2]
         m = int(0.15 * max(x2 - x1, y2 - y1))
         x1 = max(0, x1 - m); y1 = max(0, y1 - m)
