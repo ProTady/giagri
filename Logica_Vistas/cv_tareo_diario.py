@@ -50,6 +50,8 @@ class CvTareoDiario(QWidget):
             lambda: self.ui.dtFecha.setDate(QDate.currentDate().addDays(-1))
         )
         self.ui.btnNuevo.clicked.connect(self._nuevo)
+        self.ui.btnMasivo.clicked.connect(self._masivo)
+        self.ui.btnMultiLabor.clicked.connect(self._multilabor)
         self.ui.btnDuplicar.clicked.connect(self._duplicar)
         self.ui.btnEditar.clicked.connect(self._editar)
         self.ui.btnEliminar.clicked.connect(self._eliminar)
@@ -181,6 +183,26 @@ class CvTareoDiario(QWidget):
         dlg = CvTareoForm(self._sesion.usuario.id_fundo,
                           fecha_default=self._fecha_actual(), parent=self)
         if dlg.exec() == dlg.DialogCode.Accepted:
+            self._cargar()
+
+    def _masivo(self) -> None:
+        from Logica_Vistas.cv_tareo_masivo import CvTareoMasivo
+        dlg = CvTareoMasivo(self._sesion.usuario.id_fundo,
+                             fecha_default=self._fecha_actual(), parent=self)
+        if dlg.exec() == dlg.DialogCode.Accepted:
+            n = getattr(dlg, "_n_creados", 0)
+            QMessageBox.information(self, "Tareo masivo",
+                                     f"Se crearon {n} filas de tareo.")
+            self._cargar()
+
+    def _multilabor(self) -> None:
+        from Logica_Vistas.cv_tareo_multilabor import CvTareoMultiLabor
+        dlg = CvTareoMultiLabor(self._sesion.usuario.id_fundo,
+                                 fecha_default=self._fecha_actual(), parent=self)
+        if dlg.exec() == dlg.DialogCode.Accepted:
+            n = getattr(dlg, "_n_creados", 0)
+            QMessageBox.information(self, "Múltiples labores",
+                                     f"Se crearon {n} filas de tareo.")
             self._cargar()
 
     def _duplicar(self) -> None:

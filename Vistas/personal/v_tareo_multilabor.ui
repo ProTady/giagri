@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TareoMultiLabor</class>
+ <widget class="QDialog" name="TareoMultiLabor">
+  <property name="geometry"><rect><x>0</x><y>0</y><width>980</width><height>660</height></rect></property>
+  <property name="windowTitle"><string>Tareo Múltiples Labores</string></property>
+  <layout class="QVBoxLayout" name="lytRoot">
+   <property name="leftMargin"><number>20</number></property>
+   <property name="topMargin"><number>16</number></property>
+   <property name="rightMargin"><number>20</number></property>
+   <property name="bottomMargin"><number>16</number></property>
+   <property name="spacing"><number>10</number></property>
+   <item><widget class="QLabel" name="lblTitulo"><property name="text"><string>Tareo Múltiples Labores</string></property></widget></item>
+   <item><widget class="QLabel" name="lblSub"><property name="text"><string>Un empleado realizando varias labores en uno o varios lotes en el día.</string></property></widget></item>
+   <item><widget class="QFrame" name="lineSep1"><property name="frameShape"><enum>QFrame::HLine</enum></property><property name="frameShadow"><enum>QFrame::Plain</enum></property></widget></item>
+
+   <item>
+    <layout class="QHBoxLayout" name="lytEnc">
+     <property name="spacing"><number>14</number></property>
+     <item><widget class="QLabel" name="l1"><property name="text"><string>Fecha:</string></property></widget></item>
+     <item><widget class="QDateEdit" name="dtFecha"><property name="calendarPopup"><bool>true</bool></property><property name="displayFormat"><string>dd/MM/yyyy</string></property></widget></item>
+     <item><widget class="QLabel" name="l2"><property name="text"><string>Empleado:</string></property></widget></item>
+     <item><widget class="QComboBox" name="cboEmpleado"><property name="editable"><bool>true</bool></property><property name="insertPolicy"><enum>QComboBox::NoInsert</enum></property><property name="minimumSize"><size><width>320</width><height>0</height></size></property></widget></item>
+     <item><widget class="QLabel" name="l3"><property name="text"><string>Cargo común:</string></property></widget></item>
+     <item><widget class="QComboBox" name="cboCargo"/></item>
+     <item><spacer name="spE"><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property></spacer></item>
+    </layout>
+   </item>
+
+   <item><widget class="QFrame" name="lineSep2"><property name="frameShape"><enum>QFrame::HLine</enum></property><property name="frameShadow"><enum>QFrame::Plain</enum></property></widget></item>
+   <item><widget class="QLabel" name="lblFila"><property name="text"><string><b>Agregar fila a la lista</b></string></property></widget></item>
+
+   <item>
+    <layout class="QHBoxLayout" name="lytFila">
+     <property name="spacing"><number>8</number></property>
+     <item>
+      <layout class="QFormLayout" name="lytF1">
+       <property name="horizontalSpacing"><number>10</number></property>
+       <property name="verticalSpacing"><number>6</number></property>
+       <item row="0" column="0"><widget class="QLabel" name="lf1"><property name="text"><string>Lote:</string></property></widget></item>
+       <item row="0" column="1"><widget class="QComboBox" name="cboLote"/></item>
+       <item row="1" column="0"><widget class="QLabel" name="lf2"><property name="text"><string>Actividad:</string></property></widget></item>
+       <item row="1" column="1"><widget class="QComboBox" name="cboActividad"/></item>
+       <item row="2" column="0"><widget class="QLabel" name="lf3"><property name="text"><string>Labor:</string></property></widget></item>
+       <item row="2" column="1"><widget class="QComboBox" name="cboLabor"/></item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QFormLayout" name="lytF2">
+       <property name="horizontalSpacing"><number>10</number></property>
+       <property name="verticalSpacing"><number>6</number></property>
+       <item row="0" column="0"><widget class="QLabel" name="lf4"><property name="text"><string>H. Mañana:</string></property></widget></item>
+       <item row="0" column="1"><widget class="QDoubleSpinBox" name="spHM"><property name="maximum"><double>24.0</double></property><property name="decimals"><number>2</number></property><property name="suffix"><string> h</string></property></widget></item>
+       <item row="1" column="0"><widget class="QLabel" name="lf5"><property name="text"><string>H. Tarde:</string></property></widget></item>
+       <item row="1" column="1"><widget class="QDoubleSpinBox" name="spHT"><property name="maximum"><double>24.0</double></property><property name="decimals"><number>2</number></property><property name="suffix"><string> h</string></property></widget></item>
+       <item row="2" column="0"><widget class="QLabel" name="lf6"><property name="text"><string>H. Extras:</string></property></widget></item>
+       <item row="2" column="1"><widget class="QDoubleSpinBox" name="spHE"><property name="maximum"><double>24.0</double></property><property name="decimals"><number>2</number></property><property name="suffix"><string> h</string></property></widget></item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="lytF3">
+       <property name="spacing"><number>6</number></property>
+       <item><widget class="QLabel" name="lf7"><property name="text"><string>Comentario:</string></property></widget></item>
+       <item><widget class="QPlainTextEdit" name="txtComent"><property name="maximumSize"><size><width>16777215</width><height>80</height></size></property></widget></item>
+       <item><widget class="QPushButton" name="btnAgregar"><property name="text"><string>+ Agregar a la lista</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+
+   <item><widget class="QFrame" name="lineSep3"><property name="frameShape"><enum>QFrame::HLine</enum></property><property name="frameShadow"><enum>QFrame::Plain</enum></property></widget></item>
+   <item><widget class="QLabel" name="lblListaTit"><property name="text"><string><b>Filas pendientes de guardar</b></string></property></widget></item>
+   <item><widget class="QTableWidget" name="tblFilas"/></item>
+   <item>
+    <layout class="QHBoxLayout" name="lytAcc">
+     <item><widget class="QPushButton" name="btnQuitar"><property name="text"><string>Quitar fila seleccionada</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+     <item><spacer name="sp1"><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property></spacer></item>
+     <item><widget class="QLabel" name="lblTotales"><property name="text"><string>Total: 0 filas · 0.00 h · S/. 0.00</string></property></widget></item>
+    </layout>
+   </item>
+
+   <item><widget class="QLabel" name="lblError"><property name="text"><string/></property><property name="minimumSize"><size><width>0</width><height>18</height></size></property></widget></item>
+   <item>
+    <layout class="QHBoxLayout" name="lytBtns">
+     <item><spacer name="sp2"><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property></spacer></item>
+     <item><widget class="QPushButton" name="btnCancelar"><property name="text"><string>Cancelar</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+     <item><widget class="QPushButton" name="btnGuardar"><property name="text"><string>Guardar todo</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property><property name="default"><bool>true</bool></property></widget></item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

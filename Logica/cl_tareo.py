@@ -120,6 +120,33 @@ class ClTareo:
             conn.commit()
         return nuevo
 
+    def crear_masivo(self, filas: list[dict]) -> int:
+        """Crea N filas en una transacción. Devuelve cantidad creada.
+
+        Cada fila es un dict con las mismas claves de crear().
+        """
+        if not filas:
+            return 0
+        for f in filas:
+            self._validar(f)
+        sql = """
+            INSERT INTO personal.tareo
+                (id_fundo, id_empleado, fecha, id_cargo, id_lote,
+                 id_labor, id_actividad,
+                 horas_manana, horas_tarde, horas_extras,
+                 comentario, creado_por)
+            VALUES (%(id_fundo)s, %(id_empleado)s, %(fecha)s,
+                    %(id_cargo)s, %(id_lote)s,
+                    %(id_labor)s, %(id_actividad)s,
+                    %(horas_manana)s, %(horas_tarde)s, %(horas_extras)s,
+                    %(comentario)s, %(creado_por)s)
+        """
+        with ConexionPostgres().conexion() as conn, conn.cursor() as cur:
+            for f in filas:
+                cur.execute(sql, self._normalizar(f))
+            conn.commit()
+        return len(filas)
+
     def actualizar(self, id_tareo: int, datos: dict) -> None:
         self._validar(datos)
         sql = """

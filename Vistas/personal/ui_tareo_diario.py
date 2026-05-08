@@ -83,6 +83,18 @@ class Ui_TareoDiario(object):
 
         self.lytFil.addWidget(self.btnNuevo)
 
+        self.btnMasivo = QPushButton(TareoDiario)
+        self.btnMasivo.setObjectName(u"btnMasivo")
+        self.btnMasivo.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+
+        self.lytFil.addWidget(self.btnMasivo)
+
+        self.btnMultiLabor = QPushButton(TareoDiario)
+        self.btnMultiLabor.setObjectName(u"btnMultiLabor")
+        self.btnMultiLabor.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+
+        self.lytFil.addWidget(self.btnMultiLabor)
+
         self.btnDuplicar = QPushButton(TareoDiario)
         self.btnDuplicar.setObjectName(u"btnDuplicar")
         self.btnDuplicar.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
@@ -123,6 +135,14 @@ class Ui_TareoDiario(object):
         self.btnHoy.setText(QCoreApplication.translate("TareoDiario", u"Hoy", None))
         self.btnAyer.setText(QCoreApplication.translate("TareoDiario", u"Ayer", None))
         self.btnNuevo.setText(QCoreApplication.translate("TareoDiario", u"+ Nueva fila", None))
+        self.btnMasivo.setText(QCoreApplication.translate("TareoDiario", u"+ M\u00faltiples Empleados", None))
+#if QT_CONFIG(tooltip)
+        self.btnMasivo.setToolTip(QCoreApplication.translate("TareoDiario", u"Cuadrilla: varias personas, mismo lote/labor", None))
+#endif // QT_CONFIG(tooltip)
+        self.btnMultiLabor.setText(QCoreApplication.translate("TareoDiario", u"+ M\u00faltiples Labores", None))
+#if QT_CONFIG(tooltip)
+        self.btnMultiLabor.setToolTip(QCoreApplication.translate("TareoDiario", u"Un empleado, varias labores/lotes", None))
+#endif // QT_CONFIG(tooltip)
         self.btnDuplicar.setText(QCoreApplication.translate("TareoDiario", u"Duplicar", None))
         self.btnEditar.setText(QCoreApplication.translate("TareoDiario", u"Editar", None))
         self.btnEliminar.setText(QCoreApplication.translate("TareoDiario", u"Eliminar", None))
