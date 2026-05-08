@@ -28,7 +28,7 @@
    </item>
 
    <item><widget class="QFrame" name="lineSep2"><property name="frameShape"><enum>QFrame::HLine</enum></property><property name="frameShadow"><enum>QFrame::Plain</enum></property></widget></item>
-   <item><widget class="QLabel" name="lblFila"><property name="text"><string><b>Agregar fila a la lista</b></string></property></widget></item>
+   <item><widget class="QLabel" name="lblFila"><property name="text"><string>Agregar fila a la lista</string></property><property name="styleSheet"><string notr="true">font-weight:bold;</string></property></widget></item>
 
    <item>
     <layout class="QHBoxLayout" name="lytFila">
@@ -69,7 +69,7 @@
    </item>
 
    <item><widget class="QFrame" name="lineSep3"><property name="frameShape"><enum>QFrame::HLine</enum></property><property name="frameShadow"><enum>QFrame::Plain</enum></property></widget></item>
-   <item><widget class="QLabel" name="lblListaTit"><property name="text"><string><b>Filas pendientes de guardar</b></string></property></widget></item>
+   <item><widget class="QLabel" name="lblListaTit"><property name="text"><string>Filas pendientes de guardar</string></property><property name="styleSheet"><string notr="true">font-weight:bold;</string></property></widget></item>
    <item><widget class="QTableWidget" name="tblFilas"/></item>
    <item>
     <layout class="QHBoxLayout" name="lytAcc">
