@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CatalogosTareo</class>
+ <widget class="QWidget" name="CatalogosTareo">
+  <property name="geometry"><rect><x>0</x><y>0</y><width>1000</width><height>620</height></rect></property>
+  <layout class="QVBoxLayout" name="lytRoot">
+   <property name="leftMargin"><number>20</number></property>
+   <property name="topMargin"><number>20</number></property>
+   <property name="rightMargin"><number>20</number></property>
+   <property name="bottomMargin"><number>20</number></property>
+   <property name="spacing"><number>14</number></property>
+   <item><widget class="QLabel" name="lblTitulo"><property name="text"><string>Catálogos de Tareo</string></property></widget></item>
+   <item>
+    <widget class="QTabWidget" name="tabs">
+
+     <widget class="QWidget" name="tabAct">
+      <attribute name="title"><string>Actividades</string></attribute>
+      <layout class="QVBoxLayout" name="lytA">
+       <item>
+        <layout class="QHBoxLayout" name="lytFA">
+         <property name="spacing"><number>8</number></property>
+         <item><widget class="QLabel" name="laN"><property name="text"><string>Nombre:</string></property></widget></item>
+         <item><widget class="QLineEdit" name="txtActNombre"><property name="placeholderText"><string>Ej: Riego</string></property></widget></item>
+         <item><widget class="QLabel" name="laD"><property name="text"><string>Descripción:</string></property></widget></item>
+         <item><widget class="QLineEdit" name="txtActDesc"/></item>
+         <item><widget class="QPushButton" name="btnActAgregar"><property name="text"><string>+ Agregar</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+        </layout>
+       </item>
+       <item><widget class="QTableWidget" name="tblActividades"/></item>
+       <item>
+        <layout class="QHBoxLayout" name="lytBA">
+         <item><spacer name="spA"><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property></spacer></item>
+         <item><widget class="QPushButton" name="btnActEditar"><property name="text"><string>Editar selección</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+         <item><widget class="QPushButton" name="btnActEliminar"><property name="text"><string>Eliminar</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+
+     <widget class="QWidget" name="tabLab">
+      <attribute name="title"><string>Labores y Bonos</string></attribute>
+      <layout class="QVBoxLayout" name="lytL">
+       <item>
+        <layout class="QHBoxLayout" name="lytFL">
+         <property name="spacing"><number>8</number></property>
+         <item><widget class="QLabel" name="lpA"><property name="text"><string>Actividad:</string></property></widget></item>
+         <item><widget class="QComboBox" name="cboLabActividad"/></item>
+         <item><widget class="QLabel" name="lpN"><property name="text"><string>Nombre:</string></property></widget></item>
+         <item><widget class="QLineEdit" name="txtLabNombre"><property name="placeholderText"><string>Ej: Cosecha de palto</string></property></widget></item>
+         <item><widget class="QLabel" name="lpB"><property name="text"><string>Bono S/. /h:</string></property></widget></item>
+         <item><widget class="QDoubleSpinBox" name="spLabBono"><property name="maximum"><double>9999.99</double></property><property name="decimals"><number>2</number></property></widget></item>
+         <item><widget class="QPushButton" name="btnLabAgregar"><property name="text"><string>+ Agregar</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="lytFiltL">
+         <item><widget class="QLabel" name="lFil"><property name="text"><string>Filtrar por actividad:</string></property></widget></item>
+         <item><widget class="QComboBox" name="cboLabFiltro"/></item>
+         <item><spacer name="spLF"><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property></spacer></item>
+        </layout>
+       </item>
+       <item><widget class="QTableWidget" name="tblLabores"/></item>
+       <item>
+        <layout class="QHBoxLayout" name="lytBL">
+         <item><spacer name="spL"><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property></spacer></item>
+         <item><widget class="QPushButton" name="btnLabEditar"><property name="text"><string>Editar selección</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+         <item><widget class="QPushButton" name="btnLabEliminar"><property name="text"><string>Eliminar</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TareoForm</class>
+ <widget class="QDialog" name="TareoForm">
+  <property name="geometry"><rect><x>0</x><y>0</y><width>620</width><height>560</height></rect></property>
+  <property name="windowTitle"><string>Tareo</string></property>
+  <layout class="QVBoxLayout" name="lytRoot">
+   <property name="leftMargin"><number>20</number></property>
+   <property name="topMargin"><number>16</number></property>
+   <property name="rightMargin"><number>20</number></property>
+   <property name="bottomMargin"><number>16</number></property>
+   <property name="spacing"><number>10</number></property>
+   <item><widget class="QLabel" name="lblTitulo"><property name="text"><string>Nueva fila de Tareo</string></property></widget></item>
+   <item><widget class="QFrame" name="lineSep"><property name="frameShape"><enum>QFrame::HLine</enum></property><property name="frameShadow"><enum>QFrame::Plain</enum></property></widget></item>
+
+   <item>
+    <layout class="QFormLayout" name="lytForm">
+     <property name="horizontalSpacing"><number>14</number></property>
+     <property name="verticalSpacing"><number>10</number></property>
+     <property name="labelAlignment"><set>Qt::AlignRight|Qt::AlignVCenter</set></property>
+
+     <item row="0" column="0"><widget class="QLabel" name="l1"><property name="text"><string>Fecha *</string></property></widget></item>
+     <item row="0" column="1"><widget class="QDateEdit" name="dtFecha"><property name="calendarPopup"><bool>true</bool></property><property name="displayFormat"><string>dd/MM/yyyy</string></property></widget></item>
+
+     <item row="1" column="0"><widget class="QLabel" name="l2"><property name="text"><string>Empleado *</string></property></widget></item>
+     <item row="1" column="1"><widget class="QComboBox" name="cboEmpleado"><property name="editable"><bool>true</bool></property><property name="insertPolicy"><enum>QComboBox::NoInsert</enum></property></widget></item>
+
+     <item row="2" column="0"><widget class="QLabel" name="l3"><property name="text"><string>Cargo</string></property></widget></item>
+     <item row="2" column="1"><widget class="QComboBox" name="cboCargo"/></item>
+
+     <item row="3" column="0"><widget class="QLabel" name="l4"><property name="text"><string>Lote</string></property></widget></item>
+     <item row="3" column="1"><widget class="QComboBox" name="cboLote"/></item>
+
+     <item row="4" column="0"><widget class="QLabel" name="l5"><property name="text"><string>Actividad</string></property></widget></item>
+     <item row="4" column="1"><widget class="QComboBox" name="cboActividad"/></item>
+
+     <item row="5" column="0"><widget class="QLabel" name="l6"><property name="text"><string>Labor</string></property></widget></item>
+     <item row="5" column="1"><widget class="QComboBox" name="cboLabor"/></item>
+
+     <item row="6" column="0"><widget class="QLabel" name="l7"><property name="text"><string>Horas Mañana</string></property></widget></item>
+     <item row="6" column="1"><widget class="QDoubleSpinBox" name="spHM"><property name="maximum"><double>24.0</double></property><property name="decimals"><number>2</number></property><property name="suffix"><string> h</string></property></widget></item>
+
+     <item row="7" column="0"><widget class="QLabel" name="l8"><property name="text"><string>Horas Tarde</string></property></widget></item>
+     <item row="7" column="1"><widget class="QDoubleSpinBox" name="spHT"><property name="maximum"><double>24.0</double></property><property name="decimals"><number>2</number></property><property name="suffix"><string> h</string></property></widget></item>
+
+     <item row="8" column="0"><widget class="QLabel" name="l9"><property name="text"><string>Horas Extras</string></property></widget></item>
+     <item row="8" column="1"><widget class="QDoubleSpinBox" name="spHE"><property name="maximum"><double>24.0</double></property><property name="decimals"><number>2</number></property><property name="suffix"><string> h</string></property></widget></item>
+
+     <item row="9" column="0"><widget class="QLabel" name="l10"><property name="text"><string>Total</string></property></widget></item>
+     <item row="9" column="1"><widget class="QLabel" name="lblTotal"><property name="text"><string>0.00 h</string></property><property name="styleSheet"><string notr="true">font-weight:bold; color:#0F5F5C;</string></property></widget></item>
+
+     <item row="10" column="0"><widget class="QLabel" name="l11"><property name="text"><string>Bono labor</string></property></widget></item>
+     <item row="10" column="1"><widget class="QLabel" name="lblBono"><property name="text"><string>S/. 0.00</string></property><property name="styleSheet"><string notr="true">color:#3DBA3F; font-weight:bold;</string></property></widget></item>
+
+     <item row="11" column="0"><widget class="QLabel" name="l12"><property name="text"><string>Comentario</string></property></widget></item>
+     <item row="11" column="1"><widget class="QPlainTextEdit" name="txtComent"><property name="maximumSize"><size><width>16777215</width><height>80</height></size></property></widget></item>
+    </layout>
+   </item>
+
+   <item><widget class="QLabel" name="lblError"><property name="text"><string/></property><property name="minimumSize"><size><width>0</width><height>18</height></size></property></widget></item>
+   <item>
+    <layout class="QHBoxLayout" name="lytBtns">
+     <item><spacer name="spB"><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property></spacer></item>
+     <item><widget class="QPushButton" name="btnCancelar"><property name="text"><string>Cancelar</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+     <item><widget class="QPushButton" name="btnGuardar"><property name="text"><string>Guardar</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property><property name="default"><bool>true</bool></property></widget></item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

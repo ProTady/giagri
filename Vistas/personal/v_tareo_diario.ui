@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TareoDiario</class>
+ <widget class="QWidget" name="TareoDiario">
+  <property name="geometry"><rect><x>0</x><y>0</y><width>1280</width><height>660</height></rect></property>
+  <layout class="QVBoxLayout" name="lytRoot">
+   <property name="leftMargin"><number>20</number></property>
+   <property name="topMargin"><number>20</number></property>
+   <property name="rightMargin"><number>20</number></property>
+   <property name="bottomMargin"><number>20</number></property>
+   <property name="spacing"><number>14</number></property>
+
+   <item>
+    <layout class="QHBoxLayout" name="lytTit">
+     <item><widget class="QLabel" name="lblTitulo"><property name="text"><string>Tareo Diario</string></property></widget></item>
+     <item><spacer name="spT"><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property></spacer></item>
+     <item><widget class="QLabel" name="lblTotales"><property name="text"><string>Total horas: --  ·  Personas: --  ·  Bono: --</string></property></widget></item>
+    </layout>
+   </item>
+
+   <item>
+    <layout class="QHBoxLayout" name="lytFil">
+     <property name="spacing"><number>10</number></property>
+     <item><widget class="QLabel" name="lblFecha"><property name="text"><string>Fecha:</string></property></widget></item>
+     <item><widget class="QDateEdit" name="dtFecha"><property name="calendarPopup"><bool>true</bool></property><property name="displayFormat"><string>dd/MM/yyyy</string></property></widget></item>
+     <item><widget class="QPushButton" name="btnHoy"><property name="text"><string>Hoy</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+     <item><widget class="QPushButton" name="btnAyer"><property name="text"><string>Ayer</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+     <item><spacer name="spF"><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property></spacer></item>
+     <item><widget class="QPushButton" name="btnNuevo"><property name="text"><string>+ Nueva fila</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+     <item><widget class="QPushButton" name="btnDuplicar"><property name="text"><string>Duplicar</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+     <item><widget class="QPushButton" name="btnEditar"><property name="text"><string>Editar</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+     <item><widget class="QPushButton" name="btnEliminar"><property name="text"><string>Eliminar</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+    </layout>
+   </item>
+
+   <item><widget class="QTableWidget" name="tblTareo"/></item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -63,7 +63,7 @@ class ClEmpleado:
                    fecha_ingreso, fecha_cese, estado,
                    id_cargo, id_area, sueldo_base,
                    COALESCE(cuenta_banco,''), COALESCE(banco,''),
-                   COALESCE(observaciones,'')
+                   COALESCE(observaciones,''), regimen
               FROM personal.empleado WHERE id_empleado = %s
         """
         with ConexionPostgres().conexion() as conn, conn.cursor() as cur:
@@ -77,7 +77,7 @@ class ClEmpleado:
                   "direccion","telefono","correo",
                   "fecha_ingreso","fecha_cese","estado",
                   "id_cargo","id_area","sueldo_base",
-                  "cuenta_banco","banco","observaciones"]
+                  "cuenta_banco","banco","observaciones","regimen"]
         return dict(zip(campos, r))
 
     def siguiente_codigo(self, id_fundo: int, prefijo: str = "EMP-") -> str:
@@ -131,14 +131,14 @@ class ClEmpleado:
                 (id_fundo, codigo, dni, apellido_paterno, apellido_materno,
                  nombres, fecha_nacimiento, sexo, estado_civil,
                  direccion, telefono, correo,
-                 fecha_ingreso, fecha_cese, estado,
+                 fecha_ingreso, fecha_cese, estado, regimen,
                  id_cargo, id_area, sueldo_base,
                  cuenta_banco, banco, observaciones)
             VALUES (%(id_fundo)s, %(codigo)s, %(dni)s,
                     %(apellido_paterno)s, %(apellido_materno)s,
                     %(nombres)s, %(fecha_nacimiento)s, %(sexo)s, %(estado_civil)s,
                     %(direccion)s, %(telefono)s, %(correo)s,
-                    %(fecha_ingreso)s, %(fecha_cese)s, %(estado)s,
+                    %(fecha_ingreso)s, %(fecha_cese)s, %(estado)s, %(regimen)s,
                     %(id_cargo)s, %(id_area)s, %(sueldo_base)s,
                     %(cuenta_banco)s, %(banco)s, %(observaciones)s)
             RETURNING id_empleado
@@ -167,7 +167,7 @@ class ClEmpleado:
                 direccion = %(direccion)s, telefono = %(telefono)s,
                 correo = %(correo)s,
                 fecha_ingreso = %(fecha_ingreso)s, fecha_cese = %(fecha_cese)s,
-                estado = %(estado)s,
+                estado = %(estado)s, regimen = %(regimen)s,
                 id_cargo = %(id_cargo)s, id_area = %(id_area)s,
                 sueldo_base = %(sueldo_base)s,
                 cuenta_banco = %(cuenta_banco)s, banco = %(banco)s,

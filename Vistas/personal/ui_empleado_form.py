@@ -248,6 +248,19 @@ class Ui_EmpleadoForm(object):
 
         self.lytLab.setWidget(4, QFormLayout.FieldRole, self.cboEstado)
 
+        self.l29 = QLabel(self.tabLaboral)
+        self.l29.setObjectName(u"l29")
+
+        self.lytLab.setWidget(9, QFormLayout.LabelRole, self.l29)
+
+        self.cboRegimen = QComboBox(self.tabLaboral)
+        self.cboRegimen.addItem("")
+        self.cboRegimen.addItem("")
+        self.cboRegimen.addItem("")
+        self.cboRegimen.setObjectName(u"cboRegimen")
+
+        self.lytLab.setWidget(9, QFormLayout.FieldRole, self.cboRegimen)
+
         self.l25 = QLabel(self.tabLaboral)
         self.l25.setObjectName(u"l25")
 
@@ -371,6 +384,11 @@ class Ui_EmpleadoForm(object):
         self.cboEstado.setItemText(1, QCoreApplication.translate("EmpleadoForm", u"Vacaciones", None))
         self.cboEstado.setItemText(2, QCoreApplication.translate("EmpleadoForm", u"Suspendido", None))
         self.cboEstado.setItemText(3, QCoreApplication.translate("EmpleadoForm", u"Cesado", None))
+
+        self.l29.setText(QCoreApplication.translate("EmpleadoForm", u"R\u00e9gimen *", None))
+        self.cboRegimen.setItemText(0, QCoreApplication.translate("EmpleadoForm", u"Agrario", None))
+        self.cboRegimen.setItemText(1, QCoreApplication.translate("EmpleadoForm", u"General", None))
+        self.cboRegimen.setItemText(2, QCoreApplication.translate("EmpleadoForm", u"Otros", None))
 
         self.l25.setText(QCoreApplication.translate("EmpleadoForm", u"Sueldo base", None))
         self.l26.setText(QCoreApplication.translate("EmpleadoForm", u"Banco", None))

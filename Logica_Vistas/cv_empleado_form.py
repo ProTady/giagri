@@ -100,6 +100,7 @@ class CvEmpleadoForm(QDialog):
         self.ui.txtBanco.setText(d["banco"])
         self.ui.txtCuenta.setText(d["cuenta_banco"])
         self.ui.txtObs.setPlainText(d["observaciones"])
+        self._seleccionar_texto(self.ui.cboRegimen, d.get("regimen") or "Agrario")
 
     @staticmethod
     def _set_combo(cbo, idx: int) -> None:
@@ -152,6 +153,7 @@ class CvEmpleadoForm(QDialog):
             "cuenta_banco": self.ui.txtCuenta.text().strip(),
             "banco": self.ui.txtBanco.text().strip(),
             "observaciones": self.ui.txtObs.toPlainText().strip(),
+            "regimen": self.ui.cboRegimen.currentText(),
         }
 
     def _guardar(self) -> None:

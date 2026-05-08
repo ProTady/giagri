@@ -89,6 +89,14 @@
          <item><property name="text"><string>Cesado</string></property></item>
         </widget>
        </item>
+       <item row="9" column="0"><widget class="QLabel" name="l29"><property name="text"><string>Régimen *</string></property></widget></item>
+       <item row="9" column="1">
+        <widget class="QComboBox" name="cboRegimen">
+         <item><property name="text"><string>Agrario</string></property></item>
+         <item><property name="text"><string>General</string></property></item>
+         <item><property name="text"><string>Otros</string></property></item>
+        </widget>
+       </item>
        <item row="5" column="0"><widget class="QLabel" name="l25"><property name="text"><string>Sueldo base</string></property></widget></item>
        <item row="5" column="1"><widget class="QDoubleSpinBox" name="spSueldo"><property name="maximum"><double>999999.99</double></property><property name="decimals"><number>2</number></property></widget></item>
        <item row="6" column="0"><widget class="QLabel" name="l26"><property name="text"><string>Banco</string></property></widget></item>

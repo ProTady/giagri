@@ -148,6 +148,16 @@ class CvPrincipal(QMainWindow):
         if codigo == "PERSONAL_RECONOCIMIENTO":
             from Logica_Vistas.cv_reconocimiento_vivo import CvReconocimientoVivo
             return CvReconocimientoVivo()
+        if codigo == "PERSONAL_TAREO":
+            from Logica_Vistas.cv_tareo_diario import CvTareoDiario
+            return CvTareoDiario()
+        if codigo in ("PERSONAL_ACTIVIDADES", "PERSONAL_LABORES"):
+            from Logica_Vistas.cv_catalogos_tareo import CvCatalogosTareo
+            w = CvCatalogosTareo()
+            indice = {"PERSONAL_ACTIVIDADES": 0,
+                      "PERSONAL_LABORES": 1}.get(codigo, 0)
+            w.ui.tabs.setCurrentIndex(indice)
+            return w
         return self._crear_placeholder(codigo, nombre)
 
     def _crear_placeholder(self, codigo: str, nombre: str) -> QWidget:
